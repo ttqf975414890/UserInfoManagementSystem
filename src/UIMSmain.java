@@ -1,7 +1,7 @@
 /**
  * @author 计算机1701　叶文滔　1711640118
- * @date 2019-01-02
- * @version 1.0.0
+ * @date 2019-01-03
+ * @version 1.0.1
  */
 import java.util.*;
 
@@ -187,13 +187,13 @@ public class UIMSmain {
 							String input1 = null;
 							boolean flag = true;
 							while (flag) {
+								flag = false;
 								System.out.print("请输入学生 ID：");
 								input1 = sc.next();
 								for (int j = 0; j < pointer; j++) {
-									if (student[j].getID().equals(input1) && !(student[i].getID().equals(input))) {	// 找到列表中已经有这个 ID 就不放行，除非这就是它自己
+									if (student[j].getID().equals(input1) && !(input1.equals(input))) {	// 找到列表中已经有这个 ID 就不放行，除非这就是它自己
 										System.out.print("学生 ID 重复，重试");
-									} else {
-										flag = false;
+										flag = true;
 										break;
 									}
 								}
@@ -357,13 +357,13 @@ public class UIMSmain {
 							String input1 = null;
 							boolean flag = true;
 							while (flag) {
+								flag = false;
 								System.out.print("请输入工人 ID：");
 								input1 = sc.next();
 								for (int j = 0; j < pointer; j++) {
-									if (worker[j].getID().equals(input1) && !(worker[i].getID().equals(input))) {	// 找到列表中已经有这个 ID 就不放行，除非这就是它自己
+									if (worker[j].getID().equals(input1) && !(input1.equals(input))) {	// 找到列表中已经有这个 ID 就不放行，除非这就是它自己
 										System.out.print("工人 ID 重复，重试");
-									} else {
-										flag = false;
+										flag = true;
 										break;
 									}
 								}

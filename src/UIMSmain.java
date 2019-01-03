@@ -1,5 +1,5 @@
 /**
- * @author ¼ÆËã»ú1701¡¡Ò¶ÎÄÌÏ¡¡1711640118
+ * @author è®¡ç®—æœº1701ã€€å¶æ–‡æ»”ã€€1711640118
  * @date 2019-01-02
  * @version 1.0.0
  */
@@ -9,33 +9,33 @@ public class UIMSmain {
 
 	static Scanner sc = new Scanner(System.in);
 	static final String byebye = ""
-			+ "¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ\n"
-			+ "¡õ¡õ¡ö¡ö¡ö¡ö¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡ö¡õ\n"
-			+ "¡õ¡ö¡õ¡õ¡õ¡ö¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡ö¡õ\n"
-			+ "¡õ¡ö¡õ¡õ¡õ¡ö¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡ö¡õ\n"
-			+ "¡õ¡ö¡õ¡õ¡õ¡ö¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡ö¡õ\n"
-			+ "¡õ¡ö¡õ¡õ¡ö¡ö¡õ¡õ¡ö¡õ¡õ¡õ¡ö¡õ¡õ¡õ¡ö¡ö¡ö¡ö¡õ¡õ¡ö¡õ\n"
-			+ "¡õ¡ö¡ö¡ö¡ö¡ö¡õ¡õ¡ö¡õ¡õ¡õ¡ö¡õ¡õ¡ö¡õ¡õ¡õ¡ö¡õ¡õ¡ö¡õ\n"
-			+ "¡õ¡ö¡õ¡õ¡õ¡ö¡ö¡õ¡ö¡õ¡õ¡õ¡ö¡õ¡ö¡ö¡õ¡ö¡ö¡õ¡õ¡õ¡ö¡õ\n"
-			+ "¡õ¡ö¡õ¡õ¡õ¡õ¡ö¡õ¡ö¡õ¡õ¡õ¡ö¡õ¡ö¡ö¡ö¡õ¡õ¡õ¡ö¡õ¡ö¡õ\n"
-			+ "¡õ¡ö¡õ¡õ¡õ¡ö¡ö¡õ¡ö¡õ¡õ¡ö¡ö¡õ¡õ¡ö¡õ¡õ¡õ¡ö¡õ¡õ¡õ¡õ\n"
-			+ "¡õ¡ö¡ö¡ö¡ö¡ö¡õ¡õ¡ö¡ö¡ö¡ö¡õ¡õ¡õ¡õ¡ö¡ö¡ö¡ö¡õ¡õ¡ö¡õ\n"
-			+ "¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡ö¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ\n"
-			+ "¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡ö¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ\n"
-			+ "¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡ö¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ\n"
-			+ "¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ¡õ\n";
+			+ "â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡\n"
+			+ "â–¡â–¡â– â– â– â– â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â– â–¡\n"
+			+ "â–¡â– â–¡â–¡â–¡â– â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â– â–¡\n"
+			+ "â–¡â– â–¡â–¡â–¡â– â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â– â–¡\n"
+			+ "â–¡â– â–¡â–¡â–¡â– â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â– â–¡\n"
+			+ "â–¡â– â–¡â–¡â– â– â–¡â–¡â– â–¡â–¡â–¡â– â–¡â–¡â–¡â– â– â– â– â–¡â–¡â– â–¡\n"
+			+ "â–¡â– â– â– â– â– â–¡â–¡â– â–¡â–¡â–¡â– â–¡â–¡â– â–¡â–¡â–¡â– â–¡â–¡â– â–¡\n"
+			+ "â–¡â– â–¡â–¡â–¡â– â– â–¡â– â–¡â–¡â–¡â– â–¡â– â– â–¡â– â– â–¡â–¡â–¡â– â–¡\n"
+			+ "â–¡â– â–¡â–¡â–¡â–¡â– â–¡â– â–¡â–¡â–¡â– â–¡â– â– â– â–¡â–¡â–¡â– â–¡â– â–¡\n"
+			+ "â–¡â– â–¡â–¡â–¡â– â– â–¡â– â–¡â–¡â– â– â–¡â–¡â– â–¡â–¡â–¡â– â–¡â–¡â–¡â–¡\n"
+			+ "â–¡â– â– â– â– â– â–¡â–¡â– â– â– â– â–¡â–¡â–¡â–¡â– â– â– â– â–¡â–¡â– â–¡\n"
+			+ "â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â– â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡\n"
+			+ "â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â– â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡\n"
+			+ "â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â– â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡\n"
+			+ "â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡â–¡\n";
 	
 	public static void main(String[] args) {
 		
-		boolean flag = true;		// flag ÎªÕæÊ±ÏÔÊ¾²Ëµ¥
+		boolean flag = true;		// flag ä¸ºçœŸæ—¶æ˜¾ç¤ºèœå•
 		while (true) {
 			if (flag) {
-			System.out.println("\nÑ§Ğ£ĞÅÏ¢¹ÜÀí³ÌĞò\n"
-							+ "¡¡¡¡1. Ñ§ÉúĞÅÏ¢¹ÜÀí\n"
-							+ "¡¡¡¡2. ¹¤ÈËĞÅÏ¢¹ÜÀí\n"
-							+ "¡¡¡¡3. ÍË³öÏµÍ³");
+			System.out.println("\nå­¦æ ¡ä¿¡æ¯ç®¡ç†ç¨‹åº\n"
+							+ "ã€€ã€€1. å­¦ç”Ÿä¿¡æ¯ç®¡ç†\n"
+							+ "ã€€ã€€2. å·¥äººä¿¡æ¯ç®¡ç†\n"
+							+ "ã€€ã€€3. é€€å‡ºç³»ç»Ÿ");
 			}
-			System.out.print("ÇëÑ¡ÔñËùÒªµÄ²Ù×÷£º");
+			System.out.print("è¯·é€‰æ‹©æ‰€è¦çš„æ“ä½œï¼š");
 			int input = sc.nextInt();
 			switch (input) {
 			case 1: { StudentInner.StudentManagement(); break; }
@@ -47,33 +47,34 @@ public class UIMSmain {
 				
 	}
 	
-	// Ñ§Éú¹ÜÀí²¿·Ö
+	// å­¦ç”Ÿç®¡ç†éƒ¨åˆ†
 	static class StudentInner {
 		
-		static Student[] student = new Student[10];
+		static List<Student> student = new ArrayList<Student>();
+		// static Student[] student = new Student[10];
 		static int pointer = 0;
 
 		private static void StudentManagement() {
 			
-			boolean flag = true;		// flag ÎªÕæÊ±ÏÔÊ¾²Ëµ¥
+			boolean flag = true;		// flag ä¸ºçœŸæ—¶æ˜¾ç¤ºèœå•
 			while (true) {
 				if (flag) {
-					System.out.println("\nÑ§ÉúĞÅÏ¢¹ÜÀí\n"
-									+ "¡¡¡¡1. Ôö¼ÓÑ§ÉúĞÅÏ¢\n"
-									+ "¡¡¡¡2. ÁĞ³öÈ«²¿Ñ§ÉúĞÅÏ¢\n"
-									+ "¡¡¡¡3. ²éÑ¯Ñ§ÉúĞÅÏ¢\n"
-									+ "¡¡¡¡4. É¾³ıÑ§ÉúĞÅÏ¢\n"
-									+ "¡¡¡¡5. ĞŞ¸ÄÑ§ÉúĞÅÏ¢\n"
-									+ "¡¡¡¡6. ·µ»ØÉÏÒ»¼¶²Ëµ¥");
+					System.out.println("\nå­¦ç”Ÿä¿¡æ¯ç®¡ç†\n"
+									+ "ã€€ã€€1. å¢åŠ å­¦ç”Ÿä¿¡æ¯\n"
+									+ "ã€€ã€€2. åˆ—å‡ºå…¨éƒ¨å­¦ç”Ÿä¿¡æ¯\n"
+									+ "ã€€ã€€3. æŸ¥è¯¢å­¦ç”Ÿä¿¡æ¯\n"
+									+ "ã€€ã€€4. åˆ é™¤å­¦ç”Ÿä¿¡æ¯\n"
+									+ "ã€€ã€€5. ä¿®æ”¹å­¦ç”Ÿä¿¡æ¯\n"
+									+ "ã€€ã€€6. è¿”å›ä¸Šä¸€çº§èœå•");
 				}
-				System.out.print("ÇëÑ¡Ôñ¾ßÌåµÄ²Ù×÷£º");
+				System.out.print("è¯·é€‰æ‹©å…·ä½“çš„æ“ä½œï¼š");
 				int input = sc.nextInt();
 				switch (input) {
-				case 1: { pointer = StudentInner.addStudent(student, pointer); break; }
-				case 2: { StudentInner.listStudent(student, pointer); break; }
-				case 3: { StudentInner.findStudent(student, pointer); break; }
-				case 4: { pointer = StudentInner.deleteStudent(student, pointer); break; }
-				case 5: { StudentInner.modifyStudent(student, pointer); break; }
+				case 1: { student = StudentInner.addStudent(student); break; }
+				case 2: { student = StudentInner.listStudent(student); break; }
+				case 3: { StudentInner.findStudent(student); break; }
+				case 4: { StudentInner.deleteStudent(student); break; }
+				case 5: { StudentInner.modifyStudent(student); break; }
 				case 6: { return; }
 				default: { flag = false; }
 				}			
@@ -82,166 +83,169 @@ public class UIMSmain {
 
 		static final String author = "1711640118";
 
-		static int addStudent(Student[] student, int pointer) {		// returns pointer
-			if (pointer > 9) { System.out.println("ÁĞ±íÊı¾İÏŞ 10 ÈË£¬¿Õ¼äÒÑÂú¡£"); return pointer; }
-			// ²éÕÒÓĞÃ»ÓĞÖØ¸´ ID£¬ÈçÓĞ£¬ÍË»Ø
-			while (pointer < 10) {
-				boolean flag = true;		// flag ÎªÕæ£¬ÔòÑ§ÉúÓĞÖØ¸´
+		static List<Student> addStudent(List<Student> student) {
+											//						||    ||
+			// æŸ¥æ‰¾æœ‰æ²¡æœ‰é‡å¤ IDï¼Œå¦‚æœ‰ï¼Œé€€å›	//					   \  /  \  /
+			boolean mustBeTrue = true;		//					    \/    \/
+			while (mustBeTrue) {	//	<-	<-	<-	æ­å–œï¼ï¼ï¼å‘ç°äº†ç¼–è¯‘å™¨ / IDE æœ‰ bugï¼è¿™é‡Œç›´æ¥å¡« true ä¼šæŠ¥é”™å™¢ï½
+											//					    /\    /\
+											//					   /  \  /  \
+											//						||    ||	ç¼–è¯‘å™¨ä¼šä»¥ä¸ºè¿™é‡Œæ˜¯æ­»å¾ªç¯ï¼Œå®é™…èƒ½è·³å‡ºæ¥
+				boolean flag = true;	// flag ä¸ºçœŸï¼Œåˆ™å­¦ç”Ÿæœ‰é‡å¤
 				String input1 = null;
 				while (flag) {
-					System.out.print("ÇëÊäÈëÑ§Éú ID£¨ÊäÈë 0 ·µ»Ø²Ëµ¥£©£º");
+					System.out.print("è¯·è¾“å…¥å­¦ç”Ÿ IDï¼ˆè¾“å…¥ 0 è¿”å›èœå•ï¼‰ï¼š");
 					input1 = sc.next();
-					if (input1.equals("0")) { return pointer; }
+					if (input1.equals("0")) { return student; }
 					flag = false;
-					for (int i = 0; i < pointer; i++) {
-						if (student[i].getID().equals(input1)) {
+					for (Student stu : student) {
+						if (stu.getID().equals(input1)) {
 							flag = true;
-							System.out.print("Ñ§Éú ID ÖØ¸´£¬ÖØÊÔ");
+							System.out.print("å­¦ç”Ÿ ID é‡å¤ï¼Œé‡è¯•");
 						}
 					}
 				}
-				System.out.print("ÇëÊäÈëÑ§ÉúĞÕÃû£º");
+				System.out.print("è¯·è¾“å…¥å­¦ç”Ÿå§“åï¼š");
 				String input2 = sc.next();
-				System.out.print("ÇëÊäÈëÑ§ÉúÄêÁä£º");
+				System.out.print("è¯·è¾“å…¥å­¦ç”Ÿå¹´é¾„ï¼š");
 				int input3 = sc.nextInt();
-				System.out.print("ÇëÊäÈëÑ§Éú³É¼¨£º");
+				System.out.print("è¯·è¾“å…¥å­¦ç”Ÿæˆç»©ï¼š");
 				double input4 = sc.nextDouble();
-				// ¶¨ÒåĞÂµÄ Student
-				student[pointer] = new Student(input1, input2, input3, input4);
-				pointer++;
+				// å®šä¹‰æ–°çš„ Student
+				student.add( new Student(input1, input2, input3, input4) );
 			}
-			return pointer;
+			return student;
 		}
 		
-		static void listStudent(Student[] student, int pointer) {
-			if (pointer != 0) {
-				System.out.println("----ID----|---ĞÕÃû---|--ÄêÁä--|--³É¼¨--");
-				for (int i = 0; i < pointer; i++) {
-					student[i].printInfo();
-				}				
+		static List<Student> listStudent(List<Student> student) {
+			if (student.size() != 0) {
+				System.out.println("----ID----|---å§“å---|--å¹´é¾„--|--æˆç»©--");
+				for (Student stu : student) {
+					stu.printInfo();
+				}
 			} else {
-				System.out.println("Ã»ÓĞÑ§Éú¡£");
+				System.out.println("æ²¡æœ‰å­¦ç”Ÿã€‚");
 			}
+			return student;
 		}
 		
-		static void findStudent(Student[] student, int pointer) {
-			if (pointer != 0) {
-				System.out.print("Òª²éÕÒµÄÑ§ÉúĞÕÃû£º");
+		static List<Student> findStudent(List<Student> student) {
+			if (student.size() != 0) {
+				System.out.print("è¦æŸ¥æ‰¾çš„å­¦ç”Ÿå§“åï¼š");
 				String input = sc.next();
 				boolean flag = false;
-				for (int i = 0; i < pointer; i++) {
-					if ( student[i].getName().equals(input) ) {
-						System.out.println("----ID----|---ĞÕÃû---|--ÄêÁä--|--³É¼¨--");
-						student[i].printInfo();
+				for (Student stu : student) {
+					if (stu.getName().equals(input)) {
+						System.out.println("----ID----|---å§“å---|--å¹´é¾„--|--æˆç»©--");
+						stu.printInfo();
 						flag = true;
 					}
 				}
-				if (!flag) { System.out.println("ÕÒ²»µ½¸ÃÑ§Éú¡£"); }
+				if (!flag) { System.out.println("æ‰¾ä¸åˆ°è¯¥å­¦ç”Ÿã€‚"); }
 			} else {
-				System.out.println("Ã»ÓĞÑ§Éú¡£");
+				System.out.println("æ²¡æœ‰å­¦ç”Ÿã€‚");
 			}
+			return student;
 		}
 		
-		static int deleteStudent(Student[] student, int pointer) {		// returns pointer
-			if (pointer != 0) {
-				while (pointer >= 0) {
+		static List<Student> deleteStudent(List<Student> student) {		// returns pointer
+			if (student.size() != 0) {
+				while (student.size() >= 0) {
 					boolean found = false;
-					listStudent(student, pointer);
-					System.out.print("ÇëÊäÈëÒªÉ¾³ıµÄÑ§Éú ID£¨ÊäÈë 0 ·µ»Ø²Ëµ¥£©£º");
+					listStudent(student);
+					System.out.print("è¯·è¾“å…¥è¦åˆ é™¤çš„å­¦ç”Ÿ IDï¼ˆè¾“å…¥ 0 è¿”å›èœå•ï¼‰ï¼š");
 					String input = sc.next();
 					if (input.equals("0")) { break; }
-					for (int i = 0; i < pointer; i++) {
-						if ( student[i].getID().equals(input) ) {		// ¾Í¾ö¶¨ÒªÉ¾ÄãÁË
-							int j;
-							for (j = i; j < pointer - 1; j++) {
-								student[j] = student[j+1];
-							}
-							student[j] = null;
+					for (Student stu : student) {
+						if ( stu.getID().equals(input) ) {		// å°±å†³å®šè¦åˆ ä½ äº†
+							student.remove(stu);
 							found = true;
 							break;
 						}
 					}
-					if (found) {
-						pointer--;
-					} else {
-						System.out.println("ÕÒ²»µ½Õâ¸öÑ§Éú.");
+					if (!found) {
+						System.out.println("æ‰¾ä¸åˆ°è¿™ä¸ªå­¦ç”Ÿ.");
 					}
 				}
 			} else {
-				System.out.println("Ã»ÓĞÑ§Éú¡£");
+				System.out.println("æ²¡æœ‰å­¦ç”Ÿã€‚");
 			}
-			return pointer;
+			return student;
 		}
 		
-		static void modifyStudent(Student[] student, int pointer) {
-			if (pointer != 0) {
+		static List<Student> modifyStudent(List<Student> student) {
+			if (student.size() != 0) {
 				boolean repeat = true;
 				while (repeat) {
-					repeat = false;											// ¼Ù¶¨ÕÒ²»µ½»òÕßÈ¡Ïû²Ù×÷£¬ÕÒµ½ºó²ÅÖØ¸´
-					listStudent(student, pointer);
-					System.out.print("ÇëÊäÈëÒªĞŞ¸ÄµÄÑ§Éú ID£¨ÊäÈë 0 ·µ»Ø²Ëµ¥£©£º");
-					String input = sc.next();
-					if (input.equals("0")) { return; }
-					for (int i = 0; i < pointer; i++) {
-						if ( student[i].getID().equals(input) ) {			// ÕÒµ½ÒªĞŞ¸ÄµÄÈË
-							String input1 = null;
-							boolean flag = true;
+					repeat = true;
+					listStudent(student);
+					System.out.print("è¯·è¾“å…¥è¦ä¿®æ”¹çš„å­¦ç”Ÿ IDï¼ˆè¾“å…¥ 0 è¿”å›èœå•ï¼‰ï¼š");
+					String input = sc.next();						// inputï¼šæº ID
+					if (input.equals("0")) { return student; }
+					for (Student stu : student) {
+						if ( stu.getID().equals(input) ) {			// æ‰¾åˆ°è¦ä¿®æ”¹çš„äºº
+							String input1 = null;					// input1ï¼šç›®æ ‡ ID
+							boolean flag = true;					// flag ä¸ºçœŸåˆ™ ID è¾“å…¥é‡å¤
 							while (flag) {
-								System.out.print("ÇëÊäÈëÑ§Éú ID£º");
+								flag = false;
+								System.out.print("è¯·è¾“å…¥å­¦ç”Ÿ IDï¼š");
 								input1 = sc.next();
-								for (int j = 0; j < pointer; j++) {
-									if (student[j].getID().equals(input1) && !(student[i].getID().equals(input))) {	// ÕÒµ½ÁĞ±íÖĞÒÑ¾­ÓĞÕâ¸ö ID ¾Í²»·ÅĞĞ£¬³ı·ÇÕâ¾ÍÊÇËü×Ô¼º
-										System.out.print("Ñ§Éú ID ÖØ¸´£¬ÖØÊÔ");
-									} else {
-										flag = false;
+								for (Student sturep : student) {
+									if (sturep.getID().equals(input1) && !(input1.equals(input))) {	// æ‰¾åˆ°åˆ—è¡¨ä¸­å·²ç»æœ‰è¿™ä¸ª ID å°±ä¸æ”¾è¡Œï¼Œé™¤éè¿™å°±æ˜¯å®ƒè‡ªå·±
+//									if (sturep.getID().equals(input1) && !(stu.getID().equals(input))) {	// æ‰¾åˆ°åˆ—è¡¨ä¸­å·²ç»æœ‰è¿™ä¸ª ID å°±ä¸æ”¾è¡Œï¼Œé™¤éè¿™å°±æ˜¯å®ƒè‡ªå·±
+										// TODO æ‰¾å®ƒè‡ªå·±è¿˜å¯ä»¥ä¼˜åŒ–
+										System.out.print("å­¦ç”Ÿ ID é‡å¤ï¼Œé‡è¯•");
+										flag = true;
 										break;
 									}
 								}
 							}
-							System.out.print("ÇëÊäÈëÑ§ÉúĞÕÃû£º");
+							System.out.print("è¯·è¾“å…¥å­¦ç”Ÿå§“åï¼š");
 							String input2 = sc.next();
-							System.out.print("ÇëÊäÈëÑ§ÉúÄêÁä£º");
+							System.out.print("è¯·è¾“å…¥å­¦ç”Ÿå¹´é¾„ï¼š");
 							int input3 = sc.nextInt();
-							System.out.print("ÇëÊäÈëÑ§Éú³É¼¨£º");
+							System.out.print("è¯·è¾“å…¥å­¦ç”Ÿæˆç»©ï¼š");
 							double input4 = sc.nextDouble();
-							student[i].setInfo(input1, input2, input3, input4);
+							stu.setInfo(input1, input2, input3, input4);
 							repeat = true;
 						}
 					}
 				}
 			} else {
-				System.out.println("Ã»ÓĞÑ§Éú¡£");
+				System.out.println("æ²¡æœ‰å­¦ç”Ÿã€‚");
 			}
-		}		
+			return student;
+		}
 	}
 	
-	// ¹¤ÈË¹ÜÀí²¿·Ö
+	// å·¥äººç®¡ç†éƒ¨åˆ†
 	static class WorkerInner {
 		
-		static Worker[] worker = new Worker[10];
+		static List<Worker> worker = new ArrayList<Worker>();
+		// static Worker[] worker = new Worker[10];
 		static int pointer = 0;
-		
+
 		private static void WorkerManagement() {
 			
-			boolean flag = true;		// flag ÎªÕæÊ±ÏÔÊ¾²Ëµ¥
+			boolean flag = true;		// flag ä¸ºçœŸæ—¶æ˜¾ç¤ºèœå•
 			while (true) {
 				if (flag) {
-					System.out.println("\n¹¤ÈËĞÅÏ¢¹ÜÀí\n"
-									+ "¡¡¡¡1. Ôö¼Ó¹¤ÈËĞÅÏ¢\n"
-									+ "¡¡¡¡2. ÁĞ³öÈ«²¿¹¤ÈËĞÅÏ¢\n"
-									+ "¡¡¡¡3. ²éÑ¯¹¤ÈËĞÅÏ¢\n"
-									+ "¡¡¡¡4. É¾³ı¹¤ÈËĞÅÏ¢\n"
-									+ "¡¡¡¡5. ĞŞ¸Ä¹¤ÈËĞÅÏ¢\n"
-									+ "¡¡¡¡6. ·µ»ØÉÏÒ»¼¶²Ëµ¥");
+					System.out.println("\nå·¥äººä¿¡æ¯ç®¡ç†\n"
+									+ "ã€€ã€€1. å¢åŠ å·¥äººä¿¡æ¯\n"
+									+ "ã€€ã€€2. åˆ—å‡ºå…¨éƒ¨å·¥äººä¿¡æ¯\n"
+									+ "ã€€ã€€3. æŸ¥è¯¢å·¥äººä¿¡æ¯\n"
+									+ "ã€€ã€€4. åˆ é™¤å·¥äººä¿¡æ¯\n"
+									+ "ã€€ã€€5. ä¿®æ”¹å·¥äººä¿¡æ¯\n"
+									+ "ã€€ã€€6. è¿”å›ä¸Šä¸€çº§èœå•");
 				}
-				System.out.print("ÇëÑ¡Ôñ¾ßÌåµÄ²Ù×÷£º");
+				System.out.print("è¯·é€‰æ‹©å…·ä½“çš„æ“ä½œï¼š");
 				int input = sc.nextInt();
 				switch (input) {
-				case 1: { pointer = WorkerInner.addWorker(worker, pointer); break; }
-				case 2: { WorkerInner.listWorker(worker, pointer); break; }
-				case 3: { WorkerInner.findWorker(worker, pointer); break; }
-				case 4: { pointer = WorkerInner.deleteWorker(worker, pointer); break; }
-				case 5: { WorkerInner.modifyWorker(worker, pointer); break; }
+				case 1: { worker = WorkerInner.addWorker(worker); break; }
+				case 2: { worker = WorkerInner.listWorker(worker); break; }
+				case 3: { WorkerInner.findWorker(worker); break; }
+				case 4: { WorkerInner.deleteWorker(worker); break; }
+				case 5: { WorkerInner.modifyWorker(worker); break; }
 				case 6: { return; }
 				default: { flag = false; }
 				}			
@@ -250,143 +254,142 @@ public class UIMSmain {
 
 		static final String author = "1711640118";
 
-		static int addWorker(Worker[] worker, int pointer) {		// returns pointer
-			if (pointer > 9) { System.out.println("ÁĞ±íÊı¾İÏŞ 10 ÈË£¬¿Õ¼äÒÑÂú¡£"); return pointer; }
-			// ²éÕÒÓĞÃ»ÓĞÖØ¸´ ID£¬ÈçÓĞ£¬ÍË»Ø
-			while (pointer < 10) {
-				boolean flag = true;		// flag ÎªÕæ£¬Ôò¹¤ÈËÓĞÖØ¸´
+		static List<Worker> addWorker(List<Worker> worker) {
+											//						||    ||
+			// æŸ¥æ‰¾æœ‰æ²¡æœ‰é‡å¤ IDï¼Œå¦‚æœ‰ï¼Œé€€å›	//					   \  /  \  /
+			boolean mustBeTrue = true;		//					    \/    \/
+			while (mustBeTrue) {	//	<-	<-	<-	æ­å–œï¼ï¼ï¼å‘ç°äº†ç¼–è¯‘å™¨ / IDE æœ‰ bugï¼è¿™é‡Œç›´æ¥å¡« true ä¼šæŠ¥é”™å™¢ï½
+											//					    /\    /\
+											//					   /  \  /  \
+											//						||    ||	ç¼–è¯‘å™¨ä¼šä»¥ä¸ºè¿™é‡Œæ˜¯æ­»å¾ªç¯ï¼Œå®é™…èƒ½è·³å‡ºæ¥
+				boolean flag = true;	// flag ä¸ºçœŸï¼Œåˆ™å·¥äººæœ‰é‡å¤
 				String input1 = null;
 				while (flag) {
-					System.out.print("ÇëÊäÈë¹¤ÈË ID£¨ÊäÈë 0 ·µ»Ø²Ëµ¥£©£º");
+					System.out.print("è¯·è¾“å…¥å·¥äºº IDï¼ˆè¾“å…¥ 0 è¿”å›èœå•ï¼‰ï¼š");
 					input1 = sc.next();
-					if (input1.equals("0")) { return pointer; }
+					if (input1.equals("0")) { return worker; }
 					flag = false;
-					for (int i = 0; i < pointer; i++) {
-						if (worker[i].getID().equals(input1)) {
+					for (Worker work : worker) {
+						if (work.getID().equals(input1)) {
 							flag = true;
-							System.out.print("¹¤ÈË ID ÖØ¸´£¬ÖØÊÔ");
+							System.out.print("å·¥äºº ID é‡å¤ï¼Œé‡è¯•");
 						}
 					}
 				}
-				System.out.print("ÇëÊäÈë¹¤ÈËĞÕÃû£º");
+				System.out.print("è¯·è¾“å…¥å·¥äººå§“åï¼š");
 				String input2 = sc.next();
-				System.out.print("ÇëÊäÈë¹¤ÈËÄêÁä£º");
+				System.out.print("è¯·è¾“å…¥å·¥äººå¹´é¾„ï¼š");
 				int input3 = sc.nextInt();
-				System.out.print("ÇëÊäÈë¹¤ÈË¹¤×Ê£º");
+				System.out.print("è¯·è¾“å…¥å·¥äººæˆç»©ï¼š");
 				double input4 = sc.nextDouble();
-				System.out.print("ÇëÊäÈë¹¤ÈË¹¤×÷£º");
+				System.out.print("è¯·è¾“å…¥å·¥äººå·¥ä½œï¼š");
 				String input5 = sc.next();
-				// ¶¨ÒåĞÂµÄ Worker
-				worker[pointer] = new Worker(input1, input2, input3, input4, input5);
-				pointer++;
+				// å®šä¹‰æ–°çš„ Worker
+				worker.add( new Worker(input1, input2, input3, input4, input5) );
 			}
-			return pointer;
+			return worker;
 		}
 		
-		static void listWorker(Worker[] worker, int pointer) {
-			if (pointer != 0) {
-				System.out.println("----ID----|---ĞÕÃû---|--ÄêÁä--|--¹¤×Ê--|---¹¤×÷---");
-				for (int i = 0; i < pointer; i++) {
-					worker[i].printInfo();
-				}				
+		static List<Worker> listWorker(List<Worker> worker) {
+			if (worker.size() != 0) {
+				System.out.println("----ID----|---å§“å---|--å¹´é¾„--|--å·¥èµ„--|---å·¥ä½œ---");
+				for (Worker work : worker) {
+					work.printInfo();
+				}
 			} else {
-				System.out.println("Ã»ÓĞ¹¤ÈË¡£");
+				System.out.println("æ²¡æœ‰å·¥äººã€‚");
 			}
+			return worker;
 		}
 		
-		static void findWorker(Worker[] worker, int pointer) {
-			if (pointer != 0) {
-				System.out.print("Òª²éÕÒµÄ¹¤ÈËĞÕÃû£º");
+		static List<Worker> findWorker(List<Worker> worker) {
+			if (worker.size() != 0) {
+				System.out.print("è¦æŸ¥æ‰¾çš„å·¥äººå§“åï¼š");
 				String input = sc.next();
 				boolean flag = false;
-				for (int i = 0; i < pointer; i++) {
-					if ( worker[i].getName().equals(input) ) {
-						System.out.println("----ID----|---ĞÕÃû---|--ÄêÁä--|--¹¤×Ê--|---¹¤×÷---");
-						worker[i].printInfo();
+				for (Worker work : worker) {
+					if (work.getName().equals(input)) {
+						System.out.println("----ID----|---å§“å---|--å¹´é¾„--|--å·¥èµ„--|---å·¥ä½œ---");
+						work.printInfo();
 						flag = true;
 					}
 				}
-				if (!flag) { System.out.println("ÕÒ²»µ½¸Ã¹¤ÈË¡£"); }
+				if (!flag) { System.out.println("æ‰¾ä¸åˆ°è¯¥å·¥äººã€‚"); }
 			} else {
-				System.out.println("Ã»ÓĞ¹¤ÈË¡£");
+				System.out.println("æ²¡æœ‰å·¥äººã€‚");
 			}
+			return worker;
 		}
 		
-		static int deleteWorker(Worker[] worker, int pointer) {		// returns pointer
-			if (pointer != 0) {
-				while (pointer >= 0) {
+		static List<Worker> deleteWorker(List<Worker> worker) {		// returns pointer
+			if (worker.size() != 0) {
+				while (worker.size() >= 0) {
 					boolean found = false;
-					listWorker(worker, pointer);
-					System.out.print("ÇëÊäÈëÒªÉ¾³ıµÄ¹¤ÈË ID£¨ÊäÈë 0 ·µ»Ø²Ëµ¥£©£º");
+					listWorker(worker);
+					System.out.print("è¯·è¾“å…¥è¦åˆ é™¤çš„å·¥äºº IDï¼ˆè¾“å…¥ 0 è¿”å›èœå•ï¼‰ï¼š");
 					String input = sc.next();
 					if (input.equals("0")) { break; }
-					for (int i = 0; i < pointer; i++) {
-						if ( worker[i].getID().equals(input) ) {
-							int j;
-							for (j = i; j < pointer - 1; j++) {
-								worker[j] = worker[j+1];
-							}
-							worker[j] = null;
+					for (Worker work : worker) {
+						if ( work.getID().equals(input) ) {		// å°±å†³å®šè¦åˆ ä½ äº†
+							worker.remove(work);
 							found = true;
 							break;
 						}
 					}
-					if (found) {
-						pointer--;
-					} else {
-						System.out.println("ÕÒ²»µ½Õâ¸ö¹¤ÈË¡£");
+					if (!found) {
+						System.out.println("æ‰¾ä¸åˆ°è¿™ä¸ªå·¥äºº.");
 					}
 				}
 			} else {
-				System.out.println("Ã»ÓĞ¹¤ÈË¡£");
+				System.out.println("æ²¡æœ‰å·¥äººã€‚");
 			}
-			return pointer;
+			return worker;
 		}
 		
-		static void modifyWorker(Worker[] worker, int pointer) {
-			if (pointer != 0) {
+		static List<Worker> modifyWorker(List<Worker> worker) {
+			if (worker.size() != 0) {
 				boolean repeat = true;
 				while (repeat) {
-					repeat = false;											// ¼Ù¶¨ÕÒ²»µ½»òÕßÈ¡Ïû²Ù×÷£¬ÕÒµ½ºó²ÅÖØ¸´
-					listWorker(worker, pointer);
-					System.out.print("ÇëÊäÈëÒªĞŞ¸ÄµÄ¹¤ÈË ID£¨ÊäÈë 0 ·µ»Ø²Ëµ¥£©£º");
-					String input = sc.next();
-					if (input.equals("0")) { return; }
-					for (int i = 0; i < pointer; i++) {
-						if ( worker[i].getID().equals(input) ) {			// ÕÒµ½ÒªĞŞ¸ÄµÄÈË
-							String input1 = null;
-							boolean flag = true;
+					repeat = true;
+					listWorker(worker);
+					System.out.print("è¯·è¾“å…¥è¦ä¿®æ”¹çš„å·¥äºº IDï¼ˆè¾“å…¥ 0 è¿”å›èœå•ï¼‰ï¼š");
+					String input = sc.next();						// inputï¼šæº ID
+					if (input.equals("0")) { return worker; }
+					for (Worker work : worker) {
+						if ( work.getID().equals(input) ) {			// æ‰¾åˆ°è¦ä¿®æ”¹çš„äºº
+							String input1 = null;					// input1ï¼šç›®æ ‡ ID
+							boolean flag = true;					// flag ä¸ºçœŸåˆ™ ID è¾“å…¥é‡å¤
 							while (flag) {
-								System.out.print("ÇëÊäÈë¹¤ÈË ID£º");
+								flag = false;
+								System.out.print("è¯·è¾“å…¥å·¥äºº IDï¼š");
 								input1 = sc.next();
-								for (int j = 0; j < pointer; j++) {
-									if (worker[j].getID().equals(input1) && !(worker[i].getID().equals(input))) {	// ÕÒµ½ÁĞ±íÖĞÒÑ¾­ÓĞÕâ¸ö ID ¾Í²»·ÅĞĞ£¬³ı·ÇÕâ¾ÍÊÇËü×Ô¼º
-										System.out.print("¹¤ÈË ID ÖØ¸´£¬ÖØÊÔ");
-									} else {
-										flag = false;
+								for (Worker workrep : worker) {
+									if (workrep.getID().equals(input1) && !(input1.equals(input))) {	// æ‰¾åˆ°åˆ—è¡¨ä¸­å·²ç»æœ‰è¿™ä¸ª ID å°±ä¸æ”¾è¡Œï¼Œé™¤éè¿™å°±æ˜¯å®ƒè‡ªå·±
+										System.out.print("å·¥äºº ID é‡å¤ï¼Œé‡è¯•");
+										flag = true;
 										break;
 									}
 								}
 							}
-							System.out.print("ÇëÊäÈë¹¤ÈËĞÕÃû£º");
+							System.out.print("è¯·è¾“å…¥å·¥äººå§“åï¼š");
 							String input2 = sc.next();
-							System.out.print("ÇëÊäÈë¹¤ÈËÄêÁä£º");
+							System.out.print("è¯·è¾“å…¥å·¥äººå¹´é¾„ï¼š");
 							int input3 = sc.nextInt();
-							System.out.print("ÇëÊäÈë¹¤ÈË¹¤×Ê£º");
+							System.out.print("è¯·è¾“å…¥å·¥äººæˆç»©ï¼š");
 							double input4 = sc.nextDouble();
-							System.out.print("ÇëÊäÈë¹¤ÈË¹¤×÷£º");
+							System.out.print("è¯·è¾“å…¥å·¥äººå·¥ä½œï¼š");
 							String input5 = sc.next();
-							worker[i].setInfo(input1, input2, input3, input4, input5);
+							work.setInfo(input1, input2, input3, input4, input5);
 							repeat = true;
 						}
 					}
 				}
 			} else {
-				System.out.println("Ã»ÓĞ¹¤ÈË¡£");
+				System.out.println("æ²¡æœ‰å·¥äººã€‚");
 			}
-		}		
+			return worker;
+		}
 	}
-
 }
 
 abstract class Person {

@@ -9,7 +9,7 @@
 - Author: 计算机 1701　叶文滔　1711640118  
 - Author website: http://ttqf.tech  
 
-## 3. Environments
+## 2. Environments
 These projects are tested on the following platform:  
 - Windows 10 Profressional 1803 (10.0.17134.1)  
 - Eclipse Photon (4.8.0) (20180619-1200)  

@@ -24,10 +24,12 @@ public class CLI {
 			+ "□□□□□□□□□□■□□□□□□□□□□□□□\n"
 			+ "□□□□□□□□□□□□□□□□□□□□□□□□\n";
 	
-	private StudentModel stuModel = new StudentModel();
-	private WorkerModel workModel = new WorkerModel();
+	private StudentModel stuModel;
+	private WorkerModel workModel;
 	
-	public CLI() {
+	public CLI(StudentModel stuModel, WorkerModel workModel) {
+		this.stuModel = stuModel;
+		this.workModel = workModel;
 		boolean flag = true;		// flag 为真时显示菜单
 		while (true) {
 			if (flag) {
@@ -46,92 +48,278 @@ public class CLI {
 			}			
 		}
 	}
-	
+		
+	private void listStudent() {
+		System.out.println("----ID----|---姓名---|--年龄--|--成绩--");
+		if (stuModel.count() == 0) {
+			System.out.println("列表中没有学生");
+		} else {
+			for (Student student : stuModel.list()) {
+				System.out.println(String.format(" %8s | %8s | %6d | %6.1f ", student.getID(), student.getName(), student.getAge(), student.getScore()));					
+			}
+		}
+	}
 	private void StudentManagement() {
 		
-	}
-	
-	static List<Worker> worker = new ArrayList<Worker>();
-	
-	private void WorkerManagement() {
-		boolean showMenu = true;		// flag 为真时显示菜单
 		while (true) {
-			if (showMenu) {
-				System.out.println("\n工人信息管理\n"
-								+ "　　1. 增加工人信息\n"
-								+ "　　2. 查询工人信息\n"
-								+ "　　4. 修改工人信息\n"
-								+ "　　3. 删除工人信息\n"
-								+ "　　5. 返回上一级菜单");
-			}
+			System.out.println();
+			listStudent();
+			System.out.println("\n学生信息管理\n"
+							+ "　　1. 增加学生信息\n"
+							+ "　　2. 删除学生信息\n"
+							+ "　　3. 修改学生信息\n"
+							+ "　　4. 查询学生信息\n"
+							+ "　　5. 模糊查询学生信息\n"
+							+ "　　6. 返回上一级菜单");
 			System.out.print("请选择具体的操作：");
 			int menuInput = sc.nextInt();
 			switch (menuInput) {
-			case 1: {													// 增加
+			case 1: {	// 增加
 				String inputID = null;
-				boolean dumplicated = true;
-				while (dumplicated) {
+				while (true) {
+					System.out.print("请输入学生 ID（输入 0 返回菜单）：");
+					inputID = sc.next();
+					if (inputID.equals("0")) { break; }
+					if (stuModel.hasID(inputID)) {
+						System.out.print("学生 ID 重复，重试");
+						continue;
+					}
+					System.out.print("请输入学生姓名：");
+					String input2 = sc.next();
+					System.out.print("请输入学生年龄：");
+					int input3 = sc.nextInt();
+					System.out.print("请输入学生成绩：");
+					double input4 = sc.nextDouble();
+					// 定义新的 Student
+					stuModel.add( new Student(inputID, input2, input3, input4) );
+				}
+				break;
+			}
+			case 2: {	// 删除
+				String inputID = null;
+				while (true) {
+					System.out.println();
+					listStudent();
+					System.out.print("\n请输入要删除的学生 ID（输入 0 返回菜单）：");
+					inputID = sc.next();
+					if (inputID.equals("0")) { break; }
+					Student toDelete = stuModel.findID(inputID);
+					if (toDelete == null) {
+						System.out.print("不存在此 ID，重试");
+						continue;
+					}
+					stuModel.delete(toDelete);
+				}
+				break;
+			}
+			case 3: {	// 修改
+				String inputID = null;
+				while (true) {
+					System.out.println();
+					listStudent();
+					System.out.print("\n请输入要修改的学生 ID（输入 0 返回菜单）：");
+					inputID = sc.next();
+					if (inputID.equals("0")) { break; }
+					Student toFind = stuModel.findID(inputID);
+					if (toFind == null) {
+						System.out.print("此学生不存在，重试");
+						continue;						
+					}
+					while (true) {
+						System.out.print("请输入新的学生 ID：");
+						inputID = sc.next();
+						if (inputID.equals("0")) {
+							System.out.print("不能输入为 0 的 ID，重试");
+							continue;
+						} else { break; }
+					}
+					System.out.print("请输入学生姓名：");
+					String input2 = sc.next();
+					System.out.print("请输入学生年龄：");
+					int input3 = sc.nextInt();
+					System.out.print("请输入学生成绩：");
+					double input4 = sc.nextDouble();
+					// 定义新的 Student
+					stuModel.update(toFind, new Student(inputID, input2, input3, input4) );
+				}
+				break;
+			}
+			case 4: {	// 查询（按姓名）
+				String inputName = null;
+				// boolean repeat = true;
+				while (true) {
+					System.out.print("请输入学生姓名（输入 0 返回菜单）：");
+					inputName = sc.next();
+					if (inputName.equals("0")) { break; }
+					Student gotta = stuModel.findName(inputName);
+					if (gotta == null) {
+						System.out.print("此学生不存在，重试");
+						continue;
+					}
+					System.out.println("----ID----|---姓名---|--年龄--|--成绩--");
+					System.out.println(String.format(" %8s | %8s | %6d | %6.1f \n", gotta.getID(), gotta.getName(), gotta.getAge(), gotta.getScore()));
+				}
+				break;
+			}
+			case 5: {	// 基础的模糊查询（按姓名）
+				String inputName = null;
+				// boolean repeat = true;
+				while (true) {
+					System.out.print("请输入学生姓名包含的字符（输入 0 返回菜单）：");
+					inputName = sc.next();
+					if (inputName.equals("0")) { break; }
+					Student gotta = stuModel.fuzzySearch(inputName);
+					if (gotta == null) {
+						System.out.print("此学生不存在，重试");
+						continue;
+					}
+					System.out.println("----ID----|---姓名---|--年龄--|--成绩--");
+					System.out.println(String.format(" %8s | %8s | %6d | %6.1f \n", gotta.getID(), gotta.getName(), gotta.getAge(), gotta.getScore()));
+				}
+				break;
+			}
+			case 6: { return; }
+			default: {}
+			}
+		}
+	}
+	
+	private void listWorker() {
+		System.out.println("----ID----|---姓名---|--年龄--|--工资--|---工作---");
+		if (workModel.count() == 0) {
+			System.out.println("列表中没有工人");
+		} else {
+			for (Worker worker : workModel.list()) {
+				System.out.println(String.format(" %8s | %8s | %6d | %6.1f | %8s ", worker.getID(), worker.getName(), worker.getAge(), worker.getSalary(), worker.getJob()));					
+			}
+		}
+	}
+	private void WorkerManagement() {
+		
+		while (true) {
+			System.out.println();
+			listWorker();
+			System.out.println("\n工人信息管理\n"
+							+ "　　1. 增加工人信息\n"
+							+ "　　2. 删除工人信息\n"
+							+ "　　3. 修改工人信息\n"
+							+ "　　4. 查询工人信息\n"
+							+ "　　5. 模糊查询工人信息\n"
+							+ "　　6. 返回上一级菜单");
+			System.out.print("请选择具体的操作：");
+			int menuInput = sc.nextInt();
+			switch (menuInput) {
+			case 1: {	// 增加
+				String inputID = null;
+				while (true) {
 					System.out.print("请输入工人 ID（输入 0 返回菜单）：");
 					inputID = sc.next();
 					if (inputID.equals("0")) { break; }
-					if (workModel.findID(inputID))
-						
-						
-						
-						
-						// TODO
-						
-						
-						
-				}
-				
-				
-
-					boolean mustBeTrue = true;		//					    \/    \/
-					while (mustBeTrue) {	//	<-	<-	<-	恭喜！！！发现了编译器 / IDE 有 bug！这里直接填 true 会报错噢～
-						boolean flag = true;	// flag 为真，则工人有重复
-						String input1 = null;
-						while (flag) {
-							System.out.print("请输入工人 ID（输入 0 返回菜单）：");
-							input1 = sc.next();
-							if (input1.equals("0")) { return; }
-							flag = false;
-							for (Worker work : worker) {
-								if (work.getID().equals(input1)) {
-									flag = true;
-									System.out.print("工人 ID 重复，重试");
-								}
-							}
-						}
-						System.out.print("请输入工人姓名：");
-						String input2 = sc.next();
-						System.out.print("请输入工人年龄：");
-						int input3 = sc.nextInt();
-						System.out.print("请输入工人成绩：");
-						double input4 = sc.nextDouble();
-						System.out.print("请输入工人工作：");
-						String input5 = sc.next();
-						// 定义新的 Worker
-						worker.add( new Worker(input1, input2, input3, input4, input5) );
+					if (workModel.hasID(inputID)) {
+						System.out.print("工人 ID 重复，重试");
+						continue;
 					}
-					return;
-					break;
+					System.out.print("请输入工人姓名：");
+					String input2 = sc.next();
+					System.out.print("请输入工人年龄：");
+					int input3 = sc.nextInt();
+					System.out.print("请输入工人工资：");
+					double input4 = sc.nextDouble();
+					System.out.print("请输入工人工作：");
+					String input5 = sc.next();
+					// 定义新的 Worker
+					workModel.add( new Worker(inputID, input2, input3, input4, input5) );
+				}
+				break;
 			}
-			case 2: {
-				WorkerInner.list(worker); break;
+			case 2: {	// 删除
+				String inputID = null;
+				while (true) {
+					System.out.println();
+					listWorker();
+					System.out.print("\n请输入要删除的工人 ID（输入 0 返回菜单）：");
+					inputID = sc.next();
+					if (inputID.equals("0")) { break; }
+					Worker toDelete = workModel.findID(inputID);
+					if (toDelete == null) {
+						System.out.print("不存在此 ID，重试");
+						continue;
+					}
+					workModel.delete(toDelete);
+				}
+				break;
 			}
-			case 3: {
-				WorkerInner.find(worker); break;
+			case 3: {	// 修改
+				String inputID = null;
+				while (true) {
+					System.out.println();
+					listWorker();
+					System.out.print("\n请输入要修改的工人 ID（输入 0 返回菜单）：");
+					inputID = sc.next();
+					if (inputID.equals("0")) { break; }
+					Worker toFind = workModel.findID(inputID);
+					if (toFind == null) {
+						System.out.print("此工人不存在，重试");
+						continue;						
+					}
+					while (true) {
+						System.out.print("请输入新的工人 ID：");
+						inputID = sc.next();
+						if (inputID.equals("0")) {
+							System.out.print("不能输入为 0 的 ID，重试");
+							continue;
+						} else { break; }
+					}
+					System.out.print("请输入工人姓名：");
+					String input2 = sc.next();
+					System.out.print("请输入工人年龄：");
+					int input3 = sc.nextInt();
+					System.out.print("请输入工人工资：");
+					double input4 = sc.nextDouble();
+					System.out.print("请输入工人工作：");
+					String input5 = sc.next();
+					// 定义新的 Worker
+					workModel.update(toFind, new Worker(inputID, input2, input3, input4, input5) );
+				}
+				break;
 			}
-			case 4: {
-				WorkerInner.delete(worker); break;
+			case 4: {	// 查询（按姓名）
+				String inputName = null;
+				// boolean repeat = true;
+				while (true) {
+					System.out.print("请输入工人姓名（输入 0 返回菜单）：");
+					inputName = sc.next();
+					if (inputName.equals("0")) { break; }
+					Worker gotta = workModel.findName(inputName);
+					if (gotta == null) {
+						System.out.print("此工人不存在，重试");
+						continue;
+					}
+					System.out.println("----ID----|---姓名---|--年龄--|--工资--|---工作---");
+					System.out.println(String.format(" %8s | %8s | %6d | %6.1f | %8s \n", gotta.getID(), gotta.getName(), gotta.getAge(), gotta.getSalary(), gotta.getJob()));
+				}
+				break;
 			}
-			case 5: {
-				WorkerInner.update(worker); break;
+			case 5: {	// 查询（按姓名）
+				String inputName = null;
+				// boolean repeat = true;
+				while (true) {
+					System.out.print("请输入工人姓名（输入 0 返回菜单）：");
+					inputName = sc.next();
+					if (inputName.equals("0")) { break; }
+					Worker gotta = workModel.fuzzySearch(inputName);
+					if (gotta == null) {
+						System.out.print("此工人不存在，重试");
+						continue;
+					}
+					System.out.println("----ID----|---姓名---|--年龄--|--工资--|---工作---");
+					System.out.println(String.format(" %8s | %8s | %6d | %6.1f | %8s \n", gotta.getID(), gotta.getName(), gotta.getAge(), gotta.getSalary(), gotta.getJob()));
+				}
+				break;
 			}
 			case 6: { return; }
-			default: { showMenu = false; }
-			}			
+			default: {}
+			}
 		}
 	}
 

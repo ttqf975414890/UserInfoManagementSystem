@@ -13,9 +13,9 @@ public class Worker extends Person {
 		this.salary = salary;
 		this.job = job;
 	}
-	public String getID() { return this.ID; }
-	public String getName() { return this.name; }
-	public int getAge() { return this.age; }
+	// public String getID() { return this.ID; }
+	// public String getName() { return this.name; }
+	// public int getAge() { return this.age; }
 	public double getSalary() { return this.salary; }
 	public String getJob() { return this.job; }
 	public void printInfo() {

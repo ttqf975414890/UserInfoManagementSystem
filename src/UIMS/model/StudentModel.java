@@ -1,12 +1,10 @@
 package UIMS.model;
 
 import java.util.*;
-
-// import UIMS.UIMSmain.StudentInner;
 import UIMS.vo.*;
 
 // 学生管理部分
-public class StudentModel implements StudentOperate {
+public class StudentModel implements PersonOperate {
 	
 	static Scanner sc = new Scanner(System.in);
 	static List<Student> stuList = new ArrayList<Student>();
@@ -98,12 +96,12 @@ public class StudentModel implements StudentOperate {
 		return 0;
 	}
 	
-	public int update(Student from, Student to) {
+	public int update(Person from, Person to) {
 		if (stuList.size() != 0) {
 			for (int i = 0; i < stuList.size(); i++) {
 				if ( from.getID().equals(stuList.get(i).getID()) ) {
 					stuList.remove(i);
-					stuList.add(i, to);
+					stuList.add(i, (Student)to);
 					return 1;
 				}
 			}
@@ -130,5 +128,13 @@ public class StudentModel implements StudentOperate {
 	
 	public int count() {
 		return stuList.size();
+	}
+	
+	public String SerializeToCsvString() {	// returns "ID,name,age,score" in each line
+		String toReturn = "";
+		for (Student stu : stuList) {
+			toReturn += stu.getID() + "," + stu.getName() + "," + stu.getAge() + "," + stu.getScore() + "\n";
+		}
+		return toReturn;
 	}
 }

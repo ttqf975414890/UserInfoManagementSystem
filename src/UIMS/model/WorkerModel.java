@@ -1,12 +1,10 @@
 package UIMS.model;
 
 import java.util.*;
-
-// import UIMS.UIMSmain.WorkerInner;
 import UIMS.vo.*;
 
 // 工人管理部分
-public class WorkerModel implements WorkerOperate {
+public class WorkerModel implements PersonOperate {
 	
 	static Scanner sc = new Scanner(System.in);
 	static List<Worker> workList = new ArrayList<Worker>();
@@ -98,12 +96,12 @@ public class WorkerModel implements WorkerOperate {
 		return 0;
 	}
 	
-	public int update(Worker from, Worker to) {
+	public int update(Person from, Person to) {
 		if (workList.size() != 0) {
 			for (int i = 0; i < workList.size(); i++) {
 				if ( from.getID().equals(workList.get(i).getID()) ) {
 					workList.remove(i);
-					workList.add(i, to);
+					workList.add(i, (Worker)to);
 					return 1;
 				}
 			}
@@ -130,5 +128,13 @@ public class WorkerModel implements WorkerOperate {
 	
 	public int count() {
 		return workList.size();
+	}
+	
+	public String SerializeToCsvString() {	// returns "ID,name,age,salary,job" in each line
+		String toReturn = "";
+		for (Worker work : workList) {
+			toReturn += work.getID() + "," + work.getName() + "," + work.getAge() + "," + work.getSalary() + "," + work.getJob() + "\n";
+		}
+		return toReturn;
 	}
 }

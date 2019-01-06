@@ -26,10 +26,26 @@ public class CLI {
 	
 	private StudentModel stuModel;
 	private WorkerModel workModel;
+	private FileOperate fileOperate;
 	
-	public CLI(StudentModel stuModel, WorkerModel workModel) {
+	public CLI(StudentModel stuModel, WorkerModel workModel, FileOperate fileOperate) {
 		this.stuModel = stuModel;
 		this.workModel = workModel;
+		this.fileOperate = fileOperate;
+		// 读取文件
+		ArrayList<Student> stuList = fileOperate.LoadStudentFrom("studentData.csv");
+		if (stuList != null) {
+			for (Student stu : stuList) {
+				stuModel.add(stu);
+			}
+		}
+		ArrayList<Worker> workList = fileOperate.LoadWorkerFrom("workerData.csv");
+		if (workList != null) {
+			for (Worker work : workList) {
+				workModel.add(work);
+			}
+		}
+		// 读取文件完毕
 		boolean flag = true;		// flag 为真时显示菜单
 		while (true) {
 			if (flag) {
@@ -93,6 +109,7 @@ public class CLI {
 					// 定义新的 Student
 					stuModel.add( new Student(inputID, input2, input3, input4) );
 				}
+				fileOperate.SaveTo("studentData.csv", stuModel.SerializeToCsvString());
 				break;
 			}
 			case 2: {	// 删除
@@ -109,6 +126,7 @@ public class CLI {
 						continue;
 					}
 					stuModel.delete(toDelete);
+					fileOperate.SaveTo("studentData.csv", stuModel.SerializeToCsvString());
 				}
 				break;
 			}
@@ -141,6 +159,7 @@ public class CLI {
 					double input4 = sc.nextDouble();
 					// 定义新的 Student
 					stuModel.update(toFind, new Student(inputID, input2, input3, input4) );
+					fileOperate.SaveTo("studentData.csv", stuModel.SerializeToCsvString());
 				}
 				break;
 			}
@@ -229,6 +248,7 @@ public class CLI {
 					String input5 = sc.next();
 					// 定义新的 Worker
 					workModel.add( new Worker(inputID, input2, input3, input4, input5) );
+					fileOperate.SaveTo("workerData.csv", workModel.SerializeToCsvString());
 				}
 				break;
 			}

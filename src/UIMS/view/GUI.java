@@ -121,67 +121,79 @@ public class GUI {
 		private static final long serialVersionUID = 1L;	// 不加这条会有警告
 		public void actionPerformed(ActionEvent e)
 		{
-			TableCellListener tcl = (TableCellListener)e.getSource();
-			if (tcl.getOldValue().equals(tcl.getNewValue())) { return; }			// 如果啥都没改，就啥也不干
-			/*
-			System.out.printf("cell changed%n");
-			System.out.print("		Row   : " + tcl.getRow());
-			System.out.print("		Column: " + tcl.getColumn());
-			System.out.print("		Old   : " + tcl.getOldValue());
-			System.out.print("		New   : " + tcl.getNewValue());
-			System.out.println("");
-			 */		
-			Object rowData1 = stuTable.getValueAt(tcl.getRow(), 0);
-			Object rowData2 = stuTable.getValueAt(tcl.getRow(), 1);
-			Object rowData3 = stuTable.getValueAt(tcl.getRow(), 2);
-			Object rowData4 = stuTable.getValueAt(tcl.getRow(), 3);
-			if ( !rowData1.equals("") &&				// 四列都有数据
-				 !rowData2.equals("") &&
-				 !rowData3.equals("") &&
-				 !rowData4.equals("") ) {
-				if (tcl.getRow() == maxLine) {				// 若是在新一行编辑
-					if ( isInteger(rowData3.toString()) &&			// 而且数据合法
-						 isNumeric(rowData4.toString())) {
-						if ( !stuModel.hasID(rowData1.toString()) ) {	// 而且 ID 不重复
-							ctrl.handleAddStudentInfo( rowData1.toString(), rowData2.toString(), Integer.parseInt(rowData3.toString()), Double.parseDouble(rowData4.toString()) );
-							setStudentStatusBar("学生信息添加成功。当前学生数：" + maxLine + "。");
-							// DefaultTableModel tableModel = (DefaultTableModel)stuTable.getModel();
-							stuTableModel.addRow(new Object[]{"", "", "", ""});
-							maxLine++;
-						} else {
-							setStudentStatusBar("新学生 ID 与已有重复，请修改。");
-						}
-					} else {
-						setStudentStatusBar("新学生数据不合法，“年龄”只能是整数，“成绩”只能是数字。");
-					}
-				} else {									// 若是编辑已有行
-					if ( isInteger(rowData3.toString()) &&			// 而且数据合法
-						 isNumeric(rowData4.toString())) {
-						if (tcl.getColumn() == 0) {						// 如果它在改 ID
-							if ( !stuModel.hasID(rowData1.toString()) ) {	// 而且新 ID 不是是已有的
-								ctrl.handleUpdateStudentInfo( tcl.getOldValue().toString(), rowData1.toString(), rowData2.toString(), Integer.parseInt(rowData3.toString()), Double.parseDouble(rowData4.toString()) );
-								setStudentStatusBar("已将 ID 为 " + tcl.getOldValue().toString() + " 的学生的 ID 更改为 " + rowData1.toString() + "。");
+			try {
+				TableCellListener tcl = (TableCellListener)e.getSource();
+				if (tcl.getOldValue().equals(tcl.getNewValue())) { return; }			// 如果啥都没改，就啥也不干
+				/*
+				System.out.printf("cell changed%n");
+				System.out.print("		Row   : " + tcl.getRow());
+				System.out.print("		Column: " + tcl.getColumn());
+				System.out.print("		Old   : " + tcl.getOldValue());
+				System.out.print("		New   : " + tcl.getNewValue());
+				System.out.println("");
+				 */		
+				Object rowData1 = stuTable.getValueAt(tcl.getRow(), 0);
+				Object rowData2 = stuTable.getValueAt(tcl.getRow(), 1);
+				Object rowData3 = stuTable.getValueAt(tcl.getRow(), 2);
+				Object rowData4 = stuTable.getValueAt(tcl.getRow(), 3);
+				if ( !rowData1.equals("") &&				// 四列都有数据
+					 !rowData2.equals("") &&
+					 !rowData3.equals("") &&
+					 !rowData4.equals("") ) {
+					if (tcl.getRow() == maxLine) {				// 若是在新一行编辑
+						if ( isInteger(rowData3.toString()) &&			// 而且数据合法
+							 isNumeric(rowData4.toString())) {
+							if ( !stuModel.hasID(rowData1.toString()) ) {	// 而且 ID 不重复
+								if ( !ctrl.handleAddStudentInfo( rowData1.toString(), rowData2.toString(), Integer.parseInt(rowData3.toString()), Double.parseDouble(rowData4.toString()) ) ) throw new FileWritingException();
+								setStudentStatusBar("学生信息添加成功。当前学生数：" + (maxLine + 1) + "。");
+								// DefaultTableModel tableModel = (DefaultTableModel)stuTable.getModel();
+								stuTableModel.addRow(new Object[]{"", "", "", ""});
+								maxLine++;
 							} else {
 								setStudentStatusBar("新学生 ID 与已有重复，请修改。");
 							}
-						} else {										// 如果它在改 ID 以外的信息
-							ctrl.handleUpdateStudentInfo( rowData1.toString(), rowData1.toString(), rowData2.toString(), Integer.parseInt(rowData3.toString()), Double.parseDouble(rowData4.toString()) );
-							setStudentStatusBar("已更新 ID 为 " + rowData1.toString() + " 的学生的信息。");
+						} else {
+							setStudentStatusBar("新学生数据不合法，“年龄”只能是整数，“成绩”只能是数字。");
 						}
-					} else {
-						setStudentStatusBar("学生数据不合法，“年龄”只能是整数，“成绩”只能是数字。");
+					} else {									// 若是编辑已有行
+						if ( isInteger(rowData3.toString()) &&			// 而且数据合法
+							 isNumeric(rowData4.toString())) {
+							if (tcl.getColumn() == 0) {						// 如果它在改 ID
+								if ( !stuModel.hasID(rowData1.toString()) ) {	// 而且新 ID 不是是已有的
+									if ( !ctrl.handleUpdateStudentInfo( tcl.getOldValue().toString(), rowData1.toString(), rowData2.toString(), Integer.parseInt(rowData3.toString()), Double.parseDouble(rowData4.toString()) ) ) throw new FileWritingException();
+									setStudentStatusBar("已将 ID 为 " + tcl.getOldValue().toString() + " 的学生的 ID 更改为 " + rowData1.toString() + "。");
+								} else {
+									setStudentStatusBar("新学生 ID 与已有重复，请修改。");
+								}
+							} else {										// 如果它在改 ID 以外的信息
+								if ( !ctrl.handleUpdateStudentInfo( rowData1.toString(), rowData1.toString(), rowData2.toString(), Integer.parseInt(rowData3.toString()), Double.parseDouble(rowData4.toString()) ) ) throw new FileWritingException();;
+								setStudentStatusBar("已更新 ID 为 " + rowData1.toString() + " 的学生的信息。");
+							}
+						} else {
+							setStudentStatusBar("学生数据不合法，“年龄”只能是整数，“成绩”只能是数字。");
+						}
 					}
+					return;
 				}
-				return;
+				setStudentStatusBar();
+			} catch (FileWritingException err) {
+				setStudentStatusBar("学生数据写入失败。请检查程序文件夹文件的写入权限。");
 			}
-			setStudentStatusBar();
 		}
 	};
+	private class FileWritingException extends Exception {
+		private static final long serialVersionUID = 1L;
+		public FileWritingException() {
+			super();
+		}
+	}
+
+	/** 处理删除功能 */
 	private class tableKeyListener implements KeyListener {
 		
-		public void keyTyped(KeyEvent e) {		// 删除操作			//  --> 这个函数会报错，不用管 <--  //
+		public void keyTyped(KeyEvent e) {
 			if ((int)e.getKeyChar() == 127) {		// 按 Del 键
-				
+				// 需要延迟执行，否则 stopCellEditing() 会引发线程安全问题
 				Timer stopEditTimer = new Timer(1, new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						// System.out.println("stop edit");
@@ -193,14 +205,14 @@ public class GUI {
 								ctrl.handleDeleteStudentInfo( toRemove );
 								stuTableModel.removeRow(stuTable.getSelectedRow());
 								maxLine--;
-								setStudentStatusBar("已移除 ID: " + toRemove + " 的学生的信息。当前学生数：" + maxLine + "。");
+								setStudentStatusBar("已移除 ID: " + toRemove + " 的学生的信息。当前学生数：" + (maxLine + 1) + "。");
 							}
 						} else {
 							setStudentStatusBar("不能对新增行进行删除操作。", true);
 						}
 
 					}
-				});// 实例化Timer类
+				});
 				stopEditTimer.setRepeats(false);
 				stopEditTimer.start();
 			}
@@ -209,6 +221,7 @@ public class GUI {
 		public void keyReleased(KeyEvent e) {}
 		
 	}
+	/** 处理查找功能 */
 	private class findChangeListener implements DocumentListener {
 
 		public void insertUpdate(DocumentEvent e) {
@@ -260,7 +273,14 @@ public class GUI {
 		DefaultTableModel tableModel = (DefaultTableModel)stuTable.getModel();
 		tableModel.addRow(new Object[]{ID, Name, age, score});
 	}
-	
+	/** 由 Controller 调用的非用户操作添加学生（如从文件读取）的响应 */
+	public void handleAddStudent(String ID, String Name, int age, double score) {
+		stuTableModel.removeRow(maxLine);					// 先把空白行删掉
+		handleStudentList(ID, Name, age, score);
+		maxLine++;
+		stuTableModel.addRow(new Object[]{"", "", "", ""});	// 再把空白行补回来
+	}
+
 	/*
 	void buildDisplayWorker() {
 

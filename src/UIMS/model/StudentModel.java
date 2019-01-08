@@ -1,7 +1,6 @@
 package UIMS.model;
 
 import java.util.*;
-import UIMS.view.View;
 import UIMS.vo.*;
 
 // 学生管理部分
@@ -9,7 +8,6 @@ public class StudentModel implements PersonOperate {
 	
 	static Scanner sc = new Scanner(System.in);
 	static ArrayList<Student> stuList = new ArrayList<Student>();
-	static View view;
 		
 	static final String author = "1711640118";
 

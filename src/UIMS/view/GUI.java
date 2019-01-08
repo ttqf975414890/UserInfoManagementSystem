@@ -3,18 +3,23 @@ package UIMS.view;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Iterator;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import UIMS.Controller.Controller;
+import UIMS.model.StudentModel;
 import UIMS.view.TableCellListener;
 
 public class GUI {
 	
+	private StudentModel stuModel;
+	private Controller ctrl;
 	private int maxLine = 0;
 	// 学生面板
 	private JFrame stuFrame;
@@ -24,22 +29,23 @@ public class GUI {
 	private JTable stuTable;
 	private JScrollPane stuTablePane;
 	private DefaultTableModel stuTableModel;
-	private JLabel stuFindLabel;
-	private JTextField stuFindText;
-	private GridLayout _2x1GridLayout = new GridLayout(2, 1);	// 2 行 1 列
-	private GridLayout _1x2GridLayout = new GridLayout(1, 2);
-	private GridLayout _1x3GridLayout = new GridLayout(1, 3);
-	private Container stuFindInput = new Container();
-	private Container stuFindOption = new Container();
-	private Container stuFind = new Container();
 	private JRadioButton stuFindRadio1 = new JRadioButton("按 ID", true);
 	private JRadioButton stuFindRadio2 = new JRadioButton("按姓名");
 	private JRadioButton stuFindRadio3 = new JRadioButton("按姓名（模糊）");
+	private JLabel stuFindLabel = new JLabel("查找： ");
+	private JTextField stuFindText = new JTextField();;
+	private GridLayout _1x5GridLayout = new GridLayout(1, 5);
+	private GridLayout _2x1GridLayout = new GridLayout(2, 1);	// 2 行 1 列
+	private Container stuFind = new Container();
+	private JLabel stuFrameStatus;
+	private Container stuBottomBar = new Container();
 
 	/** 构造方法 */
-	public GUI() {
+	public GUI(StudentModel studentModel) {
+		stuModel = studentModel;
+		// stuModel.addChangeListener(this);	// 该 MVC 模式中模型不直接控制视图，而是通过控制器中转
 		buildDisplayStudent();
-		buildDisplayWorker();
+		// buildDisplayWorker();
 	}
 	
 	/** 创建学生面板 */
@@ -49,7 +55,7 @@ public class GUI {
 		stuContent.setLayout(stuLayout);
 		// 设置 table 样式
 		stuTableModel = new DefaultTableModel(stuTableHeaders, 0);
-		stuTableModel.addRow(new Object[]{"双击并填写信息以增加学生"});
+		stuTableModel.addRow(new Object[]{"", "", "", ""});
 		stuTable = new JTable(stuTableModel);
 		stuTablePane = new JScrollPane(stuTable);
 		stuTable.setRowHeight(32);
@@ -64,31 +70,34 @@ public class GUI {
 		// TableChangeListener tableChangeListener = new TableChangeListener();
 		// stuTable.getModel().addTableModelListener(tableChangeListener);
 		*/
-		TableCellListener tcl = new TableCellListener(stuTable, tableAction);
+		new TableCellListener(stuTable, tableAction);
+		// tableKeyListener tablePressListener = new KeyListener();
+		stuTable.addKeyListener(new tableKeyListener());
 		// 设置查找器样式
-		stuFindLabel = new JLabel(" 查找：");			// 设置查找器上层
-		stuFindLabel.setFont(new Font("微软雅黑", 0, 18));
-		stuFindText = new JTextField();
-		stuFindText.setFont(new Font("微软雅黑", 0, 16));
-		stuFindInput.add(stuFindLabel);
-		stuFindInput.add(stuFindText);
-		stuFindInput.setLayout(_1x2GridLayout);
-		stuFindOption.add(stuFindRadio1);			// 设置查找器下层
-		stuFindOption.add(stuFindRadio2);
-		stuFindOption.add(stuFindRadio3);
-		stuFindRadio1.setFont(new Font("微软雅黑", 0, 18));
-		stuFindRadio2.setFont(new Font("微软雅黑", 0, 18));
-		stuFindRadio3.setFont(new Font("微软雅黑", 0, 18));
-		stuFindOption.setLayout(_1x3GridLayout);
+		stuFind.add(stuFindRadio1);
+		stuFind.add(stuFindRadio2);
+		stuFind.add(stuFindRadio3);
 		StuRadioChangeListener stuRadioChangeListener = new StuRadioChangeListener();
 		stuFindRadio1.addActionListener(stuRadioChangeListener);
 		stuFindRadio2.addActionListener(stuRadioChangeListener);
 		stuFindRadio3.addActionListener(stuRadioChangeListener);
-		stuFind.setLayout(_2x1GridLayout);			// 设置查找器整体
-		stuFind.add(stuFindInput);
-		stuFind.add(stuFindOption);
+		stuFindRadio1.setFont(new Font("微软雅黑", 0, 18));
+		stuFindRadio2.setFont(new Font("微软雅黑", 0, 18));
+		stuFindRadio3.setFont(new Font("微软雅黑", 0, 18));
+		stuFindLabel.setFont(new Font("微软雅黑", 0, 18));
+		stuFindText.setFont(new Font("微软雅黑", 0, 16));
+		stuFindText.setToolTipText("在此处输入要查找的内容，清空此框以显示全部数据");
+		stuFindText.getDocument().addDocumentListener(new findChangeListener());
+		stuFind.add(stuFindLabel);
+		stuFind.add(stuFindText);
+		stuFind.setLayout(_1x5GridLayout);
+		stuFrameStatus = new JLabel(" 在表格的最后一行空白行双击以创建新学生。");
+		stuFrameStatus.setFont(new Font("微软雅黑", 0, 16));
+		stuBottomBar.setLayout(_2x1GridLayout);			// 设置查找器整体
+		stuBottomBar.add(stuFind);
+		stuBottomBar.add(stuFrameStatus);
 		stuContent.add(stuTablePane, BorderLayout.CENTER);
-		stuContent.add(stuFind, BorderLayout.SOUTH);
+		stuContent.add(stuBottomBar, BorderLayout.SOUTH);
 		stuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	// 设置窗体
 		stuFrame.pack();
 		stuFrame.setSize(960, 540);
@@ -105,7 +114,6 @@ public class GUI {
 			case "按姓名": { stuFindRadio2.setSelected(true); break; }
 			case "按姓名（模糊）": { stuFindRadio3.setSelected(true); break; }
 			}
-			stuTable.setValueAt((Object)"233", 1, 1);
 		}
 	}
 	/** 处理表格编辑事件 */
@@ -114,66 +122,168 @@ public class GUI {
 		public void actionPerformed(ActionEvent e)
 		{
 			TableCellListener tcl = (TableCellListener)e.getSource();
+			if (tcl.getOldValue().equals(tcl.getNewValue())) { return; }			// 如果啥都没改，就啥也不干
+			/*
 			System.out.printf("cell changed%n");
-			System.out.println("Row   : " + tcl.getRow());
-			System.out.println("Column: " + tcl.getColumn());
-			System.out.println("Old   : " + tcl.getOldValue());
-			System.out.println("New   : " + tcl.getNewValue());
-			
-			/**
-			 * 
-			 * Start from here!!
-			 * 
-			 */
+			System.out.print("		Row   : " + tcl.getRow());
+			System.out.print("		Column: " + tcl.getColumn());
+			System.out.print("		Old   : " + tcl.getOldValue());
+			System.out.print("		New   : " + tcl.getNewValue());
+			System.out.println("");
+			 */		
+			Object rowData1 = stuTable.getValueAt(tcl.getRow(), 0);
+			Object rowData2 = stuTable.getValueAt(tcl.getRow(), 1);
+			Object rowData3 = stuTable.getValueAt(tcl.getRow(), 2);
+			Object rowData4 = stuTable.getValueAt(tcl.getRow(), 3);
+			if ( !rowData1.equals("") &&				// 四列都有数据
+				 !rowData2.equals("") &&
+				 !rowData3.equals("") &&
+				 !rowData4.equals("") ) {
+				if (tcl.getRow() == maxLine) {				// 若是在新一行编辑
+					if ( isInteger(rowData3.toString()) &&			// 而且数据合法
+						 isNumeric(rowData4.toString())) {
+						if ( !stuModel.hasID(rowData1.toString()) ) {	// 而且 ID 不重复
+							ctrl.handleAddStudentInfo( rowData1.toString(), rowData2.toString(), Integer.parseInt(rowData3.toString()), Double.parseDouble(rowData4.toString()) );
+							setStudentStatusBar("学生信息添加成功。当前学生数：" + maxLine + "。");
+							// DefaultTableModel tableModel = (DefaultTableModel)stuTable.getModel();
+							stuTableModel.addRow(new Object[]{"", "", "", ""});
+							maxLine++;
+						} else {
+							setStudentStatusBar("新学生 ID 与已有重复，请修改。");
+						}
+					} else {
+						setStudentStatusBar("新学生数据不合法，“年龄”只能是整数，“成绩”只能是数字。");
+					}
+				} else {									// 若是编辑已有行
+					if ( isInteger(rowData3.toString()) &&			// 而且数据合法
+						 isNumeric(rowData4.toString())) {
+						if (tcl.getColumn() == 0) {						// 如果它在改 ID
+							if ( !stuModel.hasID(rowData1.toString()) ) {	// 而且新 ID 不是是已有的
+								ctrl.handleUpdateStudentInfo( tcl.getOldValue().toString(), rowData1.toString(), rowData2.toString(), Integer.parseInt(rowData3.toString()), Double.parseDouble(rowData4.toString()) );
+								setStudentStatusBar("已将 ID 为 " + tcl.getOldValue().toString() + " 的学生的 ID 更改为 " + rowData1.toString() + "。");
+							} else {
+								setStudentStatusBar("新学生 ID 与已有重复，请修改。");
+							}
+						} else {										// 如果它在改 ID 以外的信息
+							ctrl.handleUpdateStudentInfo( rowData1.toString(), rowData1.toString(), rowData2.toString(), Integer.parseInt(rowData3.toString()), Double.parseDouble(rowData4.toString()) );
+							setStudentStatusBar("已更新 ID 为 " + rowData1.toString() + " 的学生的信息。");
+						}
+					} else {
+						setStudentStatusBar("学生数据不合法，“年龄”只能是整数，“成绩”只能是数字。");
+					}
+				}
+				return;
+			}
+			setStudentStatusBar();
 		}
 	};
-	
-	/** 显示单个客户面板 custPan */
-	public void refreshCustPane(Customer cust){
-		showCard("customer");
-		if(cust==null || cust.getId()==-1){
-			idTf.setText(null);
-			nameTf.setText(null);
-			addrTf.setText(null);
-			ageTf.setText(null);
-			return;
-		}
-		idTf.setText(new Long(cust.getId()).toString());
-		nameTf.setText(cust.getName().trim());
-		addrTf.setText(cust.getAddr().trim());
-		ageTf.setText(new Integer(cust.getAge()).toString());
-	}
-	/** 显示所有客户面板 allCustPan */
-	public void refreshAllCustPan(Set custs){
-		showCard("allcustomers");
-		String newData[][];
-		newData=new String[custs.size()][4];
-		Iterator it=custs.iterator();
-		int i=0;
-		while(it.hasNext()){
-			Customer cust=it.next();
-			newData[i][0]=new Long(cust.getId()).toString();
-			newData[i][1]=cust.getName();
-			newData[i][2]=cust.getAddr();
-			newData[i][3]=new Integer(cust.getAge()).toString();
-			i++;
-		}
-		tableModel.setDataVector(newData,tableHeaders);
-	}
+	private class tableKeyListener implements KeyListener {
+		
+		public void keyTyped(KeyEvent e) {		// 删除操作			//  --> 这个函数会报错，不用管 <--  //
+			if ((int)e.getKeyChar() == 127) {		// 按 Del 键
+				
+				Timer stopEditTimer = new Timer(1, new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						// System.out.println("stop edit");
+						stuTable.getCellEditor().stopCellEditing();
+						if (stuTable.getSelectedRow() != maxLine) {	// 不是最后一行
+							if (stuTable.getSelectedRow() != -1) {		// 排除未选中的情况
+								// System.out.println("remove line");
+								String toRemove = stuTable.getValueAt(stuTable.getSelectedRow(), 0).toString();
+								ctrl.handleDeleteStudentInfo( toRemove );
+								stuTableModel.removeRow(stuTable.getSelectedRow());
+								maxLine--;
+								setStudentStatusBar("已移除 ID: " + toRemove + " 的学生的信息。当前学生数：" + maxLine + "。");
+							}
+						} else {
+							setStudentStatusBar("不能对新增行进行删除操作。", true);
+						}
 
+					}
+				});// 实例化Timer类
+				stopEditTimer.setRepeats(false);
+				stopEditTimer.start();
+			}
+		}
+		public void keyPressed(KeyEvent e) {}
+		public void keyReleased(KeyEvent e) {}
+		
+	}
+	private class findChangeListener implements DocumentListener {
+
+		public void insertUpdate(DocumentEvent e) {
+			changed();
+		}
+		public void removeUpdate(DocumentEvent e) {
+			changed();
+		}
+		public void changedUpdate(DocumentEvent e) {
+			changed();
+		}
+		private void changed() {
+			String findTextContent = stuFindText.getText();
+			stuTableModel = new DefaultTableModel(stuTableHeaders, 0);
+			stuTable.setModel(stuTableModel);
+			if (!findTextContent.equals("")) {				// 有内容，开始查找
+				if (stuFindRadio1.isSelected()) {			// 按 ID
+					ctrl.handleGetFilteredStudentInfo(0, findTextContent);
+				} else if (stuFindRadio2.isSelected()) {
+					ctrl.handleGetFilteredStudentInfo(1, findTextContent);
+				} else if (stuFindRadio3.isSelected()) {
+					ctrl.handleGetFilteredStudentInfo(2, findTextContent);
+				}
+			} else {
+				ctrl.handleGetAllStudentInfo();
+				stuTableModel.addRow(new Object[]{"", "", "", ""});
+				setStudentStatusBar();
+			}
+		}
+	}
+	/** 设置状态栏文字 */
+	public void setStudentStatusBar(String text, boolean appendBefore) {
+		stuFrameStatus.setText(" " + text + "在表格的最后一行空白行双击以创建新学生。在一行删按 Del 键以删除学生信息。");
+	}
+	public void setStudentStatusBar(String text) {
+		stuFrameStatus.setText(" " + text);
+	}
+	public void setStudentStatusBar() {
+		stuFrameStatus.setText(" 在表格的最后一行空白行双击以创建新学生。在一行删按 Del 键以删除学生信息。");
+	}
 	
+	/** 注册 Controller */
+	public void addStudentInfoListener(Controller controller) {
+		ctrl = controller;
+	}
+	
+	/** 由 Controller 调用一次性列出学生列表的响应 */
+	public void handleStudentList(String ID, String Name, int age, double score) {
+		DefaultTableModel tableModel = (DefaultTableModel)stuTable.getModel();
+		tableModel.addRow(new Object[]{ID, Name, age, score});
+	}
+	
+	/*
 	void buildDisplayWorker() {
 
 	}
+	*/
+	
+	public static boolean isNumeric(String str)
+	{
+		try {
+			Double.parseDouble(str);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+	}
+	public static boolean isInteger(String str)
+	{
+		try {
+			Integer.parseInt(str);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+	}
 }
 
-
-
-/*
- *  This class listens for changes made to the data in the table via the
- *  TableCellEditor. When editing is started, the value of the cell is saved
- *  When editing is stopped the new value is saved. When the oold and new
- *  values are different, then the provided Action is invoked.
- *
- *  The source of the Action is a TableCellListener instance.
- */

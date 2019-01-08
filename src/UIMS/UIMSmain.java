@@ -18,8 +18,8 @@ public class UIMSmain {
 		StudentModel stuModel = new StudentModel();
 		// WorkerModel workModel = new WorkerModel();
 		// FileOperate fileOperate = new FileOperate();
-		ViewImpl view = new ViewImpl(stuModel);
-		new ControllerImpl(stuModel, view);
+		GUI gui = new GUI(stuModel);
+		new ControllerImpl(stuModel, gui);
 		
 	}
 	

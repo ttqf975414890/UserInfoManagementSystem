@@ -1,36 +1,80 @@
 package UIMS.Controller;
 
+import java.util.ArrayList;
+
 import UIMS.model.*;
 import UIMS.view.*;
+import UIMS.vo.Person;
 import UIMS.vo.Student;
 
 public class ControllerImpl implements Controller {
 
 	private StudentModel stuModel;
-	private View view;
+	private GUI gui;
 	/** 构造方法  */
-	public ControllerImpl(StudentModel StuModel, View view) {
+	public ControllerImpl(StudentModel StuModel, GUI gui) {
 		stuModel = StuModel;
-		this.view = view;
-		this.view.addStudentInfoListener(this); 	// 向视图注册控制器自身
+		this.gui = gui;
+		this.gui.addStudentInfoListener(this); 	// 向视图注册控制器自身
 	}
-	public void handleGetStudentInfo(String ID) {
-		Student stu = null;
-		stu = stuModel.findID(ID);
-		view.showDisplay(stu);		
+	public void handleAddStudentInfo(String ID, String name, int age, double score) {
+		stuModel.add( new Student(ID, name, age, score) );
 	}
-	public void handleAddStudentInfo(Student student) {
-		stuModel.add(student);
+	public void handleDeleteStudentInfo(String ID) {
+		stuModel.delete(ID);
 	}
-	public void handleDeleteStudentInfo(Student student) {
-		stuModel.delete(student);
-	}
-	public void handleUpdateStudentInfo(Student from, Student to) {
-		stuModel.update(from, to);
+	public void handleUpdateStudentInfo(String fromID, String toID, String toName, int toAge, double toScore) {
+		stuModel.update(fromID, new Student(toID, toName, toAge, toScore) );
 	}
 	public void handleGetAllStudentInfo() {
-		// TODO 列出怎么搞
-		stuModel.list();
+		ArrayList<Student> stuList = stuModel.list();
+		for (Student stu : stuList) {
+			gui.handleStudentList(stu.getID(), stu.getName(), stu.getAge(), stu.getScore());
+		}
+	}
+	public void handleGetFilteredStudentInfo(int filter, String filterContent) {	// filter：0 为按 ID 获取，1 为按姓名获取，2 为按姓名模糊获取
+		switch (filter) {
+		case 0: {
+			Student stu = (Student)stuModel.findID(filterContent);
+			if (stu != null) {
+				gui.handleStudentList(stu.getID(), stu.getName(), stu.getAge(), stu.getScore());
+				gui.setStudentStatusBar("找到 ID: " + filterContent + " 的学生共 1 个。");
+			} else {
+				gui.setStudentStatusBar("找不到 ID: " + filterContent + " 的学生。");
+			}
+			break;
+		}
+		case 1: {
+			ArrayList<Person> psList = stuModel.findName(filterContent);
+			int sum = 0;
+			for (Person ps : psList) {
+				Student stu = (Student)ps;
+				gui.handleStudentList(stu.getID(), stu.getName(), stu.getAge(), stu.getScore());
+				sum++;
+			}
+			if (sum != 0) {
+				gui.setStudentStatusBar("找到姓名: " + filterContent + " 的学生共 " + sum + " 个。");
+			} else {
+				gui.setStudentStatusBar("找不到姓名: " + filterContent + " 的学生。");
+			}
+			break;
+		}
+		case 2: {
+			ArrayList<Person> psList = stuModel.fuzzySearch(filterContent);
+			int sum = 0;
+			for (Person ps : psList) {
+				Student stu = (Student)ps;
+				gui.handleStudentList(stu.getID(), stu.getName(), stu.getAge(), stu.getScore());
+				sum++;
+			}
+			if (sum != 0) {
+				gui.setStudentStatusBar("找到姓名匹配内容: " + filterContent + " 的学生共 " + sum + " 个。");
+			} else {
+				gui.setStudentStatusBar("找不到姓名匹配内容: " + filterContent + " 的学生。");
+			}
+			break;
+		}
+		}
 	}
 
 }

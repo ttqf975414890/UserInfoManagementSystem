@@ -26,6 +26,7 @@ public class FileOperate {
 				Student stu = new Student(studentInfo[0], studentInfo[1], Integer.parseInt(studentInfo[2]), Double.parseDouble(studentInfo[3]));
 				stuList.add(stu);
 			}
+			br.close();
 		} catch (Exception e) {
 			return null;
 		}
@@ -42,6 +43,7 @@ public class FileOperate {
 				Worker work = new Worker(workerInfo[0], workerInfo[1], Integer.parseInt(workerInfo[2]), Double.parseDouble(workerInfo[3]), workerInfo[4]);
 				workList.add(work);
 			}
+			br.close();
 		} catch (Exception e) {
 			return null;
 		}

@@ -1,7 +1,6 @@
 package UIMS.model;
 
 import java.util.*;
-
 import UIMS.view.View;
 import UIMS.vo.*;
 
@@ -9,7 +8,7 @@ import UIMS.vo.*;
 public class StudentModel implements PersonOperate {
 	
 	static Scanner sc = new Scanner(System.in);
-	static List<Student> stuList = new ArrayList<Student>();
+	static ArrayList<Student> stuList = new ArrayList<Student>();
 	static View view;
 		
 	static final String author = "1711640118";
@@ -26,21 +25,10 @@ public class StudentModel implements PersonOperate {
 	}
 	
 	/** 根据 ID 查找，返回单个学生对象 */
-	public Student findID(String ID) {
+	public Person findID(String ID) {
 		if (stuList.size() != 0) {
 			for (Student stu : stuList) {
 				if (ID.equals(stu.getID())) {
-					return stu;
-				}
-			}
-		}
-		return null;		// 没有学生，或者找遍了都没找着
-	}
-	/** 根据姓名查找，返回单个学生对象 */
-	public Student findName(String name) {
-		if (stuList.size() != 0) {
-			for (Student stu : stuList) {
-				if (name.equals(stu.getName())) {
 					return stu;
 				}
 			}
@@ -60,16 +48,29 @@ public class StudentModel implements PersonOperate {
 		return false;		// 没有学生，或者找遍了都没找着
 	}
 	
-	/** 模糊查找，找有没有这个人包含这个字符串，返回单个学生对象 */
-	public Student fuzzySearch(String name) {
+	/** 根据姓名精确查找，返回找到的所有学生列表 */
+	public ArrayList<Person> findName(String name) {
+		ArrayList<Person> returnList = new ArrayList<Person>(); 
 		if (stuList.size() != 0) {
 			for (Student stu : stuList) {
-				if ( stu.getName().contains(name) ) {
-					return stu;
+				if ( stu.getName().equals(name) ) {
+					returnList.add(stu);
 				}
 			}
 		}
-		return null;		// 没有学生，或者找遍了都没找着		
+		return returnList;
+	}
+	/** 模糊查找，找有没有这个人包含这个字符串，返回找到的所有学生列表 */
+	public ArrayList<Person> fuzzySearch(String name) {
+		ArrayList<Person> returnList = new ArrayList<Person>(); 
+		if (stuList.size() != 0) {
+			for (Student stu : stuList) {
+				if ( stu.getName().contains(name) ) {
+					returnList.add(stu);
+				}
+			}
+		}
+		return returnList;
 	}
 	
 	/** 按学生对象删除学生，成功返回 1，失败返回 0 */
@@ -115,7 +116,7 @@ public class StudentModel implements PersonOperate {
 		}
 		return 0;
 	}
-	/** 按学生 ID 删除学生，成功返回 1，失败返回 0 */
+	/** 按学生 ID 修改学生，成功返回 1，失败返回 0 */
 	public int update(String from, Student to) {
 		if (stuList.size() != 0) {
 			for (int i = 0; i < stuList.size(); i++) {
@@ -130,7 +131,7 @@ public class StudentModel implements PersonOperate {
 	}
 
 	/** 返回所有学生的列表 */
-	public List<Student> list() {
+	public ArrayList<Student> list() {
 		return stuList;
 	}
 	
@@ -148,9 +149,4 @@ public class StudentModel implements PersonOperate {
 		return toReturn;
 	}
 	
-	/** 注册视图，以便当模型修改了数据库中的客户信息时，可以回调
-	视图的刷新界面的方法 */
-	public void addChangeListener(View view) {
-		this.view = view;
-	}
 }

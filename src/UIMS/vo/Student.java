@@ -1,3 +1,9 @@
+/**
+ * @author 计算机 1701　叶文滔　1711640118
+ * @date 2019-01-10
+ * @version 4.1.0
+ */
+
 package UIMS.vo;
 
 public class Student extends Person {

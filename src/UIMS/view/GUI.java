@@ -29,6 +29,7 @@ public class GUI {
 	private JTable stuTable;
 	private JScrollPane stuTablePane;
 	private DefaultTableModel stuTableModel;
+	private DefaultTableCellRenderer stuTableRenderer = new DefaultTableCellRenderer();// 设置表格对齐模式
 	private JRadioButton stuFindRadio1 = new JRadioButton("按 ID", true);
 	private JRadioButton stuFindRadio2 = new JRadioButton("按姓名");
 	private JRadioButton stuFindRadio3 = new JRadioButton("按姓名（模糊）");
@@ -61,8 +62,7 @@ public class GUI {
 		stuTable.setRowHeight(32);
 		stuTable.getTableHeader().setFont(new Font("微软雅黑", 0, 18));
 		stuTable.setFont(new Font("微软雅黑", 0, 14));
-		DefaultTableCellRenderer stuTableRenderer = new DefaultTableCellRenderer();	// 设置表格对齐模式
-		stuTableRenderer.setHorizontalAlignment(JLabel.CENTER);
+		stuTableRenderer.setHorizontalAlignment(JLabel.CENTER);		// 设置表格对齐模式
 		for(int i = 0; i< stuTable.getColumnCount(); i++) {
 			stuTable.getColumn(stuTable.getColumnName(i)).setCellRenderer(stuTableRenderer);
 		}
@@ -144,11 +144,11 @@ public class GUI {
 						if ( isInteger(rowData3.toString()) &&			// 而且数据合法
 							 isNumeric(rowData4.toString())) {
 							if ( !stuModel.hasID(rowData1.toString()) ) {	// 而且 ID 不重复
-								if ( !ctrl.handleAddStudentInfo( rowData1.toString(), rowData2.toString(), Integer.parseInt(rowData3.toString()), Double.parseDouble(rowData4.toString()) ) ) throw new FileWritingException();
-								setStudentStatusBar("学生信息添加成功。当前学生数：" + (maxLine + 1) + "。");
 								// DefaultTableModel tableModel = (DefaultTableModel)stuTable.getModel();
 								stuTableModel.addRow(new Object[]{"", "", "", ""});
 								maxLine++;
+								if ( !ctrl.handleAddStudentInfo( rowData1.toString(), rowData2.toString(), Integer.parseInt(rowData3.toString()), Double.parseDouble(rowData4.toString()) ) ) throw new FileWritingException();	// 先处理 GUI 再操作数据是为了防止文件操作错误
+								setStudentStatusBar("学生信息添加成功。当前学生数：" + (maxLine + 1) + "。");
 							} else {
 								setStudentStatusBar("新学生 ID 与已有重复，请修改。");
 							}
@@ -196,21 +196,24 @@ public class GUI {
 				// 需要延迟执行，否则 stopCellEditing() 会引发线程安全问题
 				Timer stopEditTimer = new Timer(1, new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						// System.out.println("stop edit");
-						stuTable.getCellEditor().stopCellEditing();
-						if (stuTable.getSelectedRow() != maxLine) {	// 不是最后一行
-							if (stuTable.getSelectedRow() != -1) {		// 排除未选中的情况
-								// System.out.println("remove line");
-								String toRemove = stuTable.getValueAt(stuTable.getSelectedRow(), 0).toString();
-								ctrl.handleDeleteStudentInfo( toRemove );
-								stuTableModel.removeRow(stuTable.getSelectedRow());
-								maxLine--;
-								setStudentStatusBar("已移除 ID: " + toRemove + " 的学生的信息。当前学生数：" + (maxLine + 1) + "。");
+						try {
+							// System.out.println("stop edit");
+							stuTable.getCellEditor().stopCellEditing();
+							if (stuTable.getSelectedRow() != maxLine) {	// 不是最后一行
+								if (stuTable.getSelectedRow() != -1) {		// 排除未选中的情况
+									// System.out.println("remove line");
+									String toRemove = stuTable.getValueAt(stuTable.getSelectedRow(), 0).toString();
+									stuTableModel.removeRow(stuTable.getSelectedRow());
+									maxLine--;
+									if (!ctrl.handleDeleteStudentInfo(toRemove)) throw new FileWritingException();	// 先处理 GUI 再操作数据是为了防止文件操作错误
+									setStudentStatusBar("已移除 ID: " + toRemove + " 的学生的信息。当前学生数：" + (maxLine + 1) + "。");
+								}
+							} else {
+								setStudentStatusBar("不能对新增行进行删除操作。", true);
 							}
-						} else {
-							setStudentStatusBar("不能对新增行进行删除操作。", true);
+						} catch (FileWritingException err) {
+							setStudentStatusBar("学生数据写入失败。请检查程序文件夹文件的写入权限。");
 						}
-
 					}
 				});
 				stopEditTimer.setRepeats(false);
@@ -272,6 +275,11 @@ public class GUI {
 	public void handleStudentList(String ID, String Name, int age, double score) {
 		DefaultTableModel tableModel = (DefaultTableModel)stuTable.getModel();
 		tableModel.addRow(new Object[]{ID, Name, age, score});
+		if (stuTable.getRowCount() == 1) {					// 表格居中，由于 JTable 优化不佳，这里需要多做一步操作
+			for(int i = 0; i< stuTable.getColumnCount(); i++) {
+				stuTable.getColumn(stuTable.getColumnName(i)).setCellRenderer(stuTableRenderer);
+			}			
+		}
 	}
 	/** 由 Controller 调用的非用户操作添加学生（如从文件读取）的响应 */
 	public void handleAddStudent(String ID, String Name, int age, double score) {
@@ -279,14 +287,15 @@ public class GUI {
 		handleStudentList(ID, Name, age, score);
 		maxLine++;
 		stuTableModel.addRow(new Object[]{"", "", "", ""});	// 再把空白行补回来
+		if (stuTable.getRowCount() == 1) {					// 表格居中，由于 JTable 优化不佳，这里需要多做一步操作
+			for(int i = 0; i< stuTable.getColumnCount(); i++) {
+				stuTable.getColumn(stuTable.getColumnName(i)).setCellRenderer(stuTableRenderer);
+			}			
+		}
 	}
-
-	/*
-	void buildDisplayWorker() {
-
-	}
-	*/
 	
+	
+	/** 判断数据是否合法。由于这里代码很少，就不新开包了 */
 	public static boolean isNumeric(String str)
 	{
 		try {

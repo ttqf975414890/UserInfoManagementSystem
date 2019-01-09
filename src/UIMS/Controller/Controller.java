@@ -1,3 +1,9 @@
+/**
+ * @author 计算机 1701　叶文滔　1711640118
+ * @date 2019-01-10
+ * @version 4.1.0
+ */
+
 package UIMS.Controller;
 
 public interface Controller {
@@ -20,4 +26,10 @@ public interface Controller {
 	 *                2: 按姓名（模糊）
 	 */
 	public void handleGetFilteredStudentInfo(int filter, String filterContent);
+	
+	/** 向视图层返回所有学生的数量 */
+	public int getStudentCount();
+	/** 向视图层返回该 ID 是否存在 */
+	public boolean hasID(String ID);
+		
 }

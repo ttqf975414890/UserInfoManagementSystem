@@ -1,3 +1,9 @@
+/**
+ * @author 计算机 1701　叶文滔　1711640118
+ * @date 2019-01-10
+ * @version 4.1.0
+ */
+
 package UIMS.Controller;
 
 import java.util.ArrayList;
@@ -11,7 +17,6 @@ public class ControllerImpl implements Controller {
 
 	private StudentModel stuModel;
 	private GUI gui;
-	private FileOperate fileOP = new FileOperate();
 	
 	/** 构造方法  */
 	public ControllerImpl(StudentModel StuModel, GUI gui) {
@@ -19,26 +24,20 @@ public class ControllerImpl implements Controller {
 		this.gui = gui;
 		this.gui.addStudentInfoListener(this); 	// 向视图注册控制器自身
 		// 从文件读取数据
-		ArrayList<Student> stuList = fileOP.LoadStudentFrom("studentData.csv");
-		if (stuList != null) {
-			for (Student stu : stuList) {
-				stuModel.add(stu);
-				gui.handleAddStudent(stu.getID(), stu.getName(), stu.getAge(), stu.getScore());
-			}
-			gui.setStudentStatusBar("已从文件读取学生信息。当前学生数：" + stuModel.count() + " 个。");
+		ArrayList<Student> stuList = stuModel.list();
+		for (Student stu : stuList) {
+			gui.handleAddStudent(stu.getID(), stu.getName(), stu.getAge(), stu.getScore());
 		}
+		gui.setStudentStatusBar("已从数据库读取学生信息。当前学生数：" + getStudentCount() + " 个。");		
 	}
 	public boolean handleAddStudentInfo(String ID, String name, int age, double score) {
-		stuModel.add( new Student(ID, name, age, score) );
-		return fileOP.SaveTo("studentData.csv", stuModel.SerializeToCsvString());
+		return (boolean)stuModel.add( new Student(ID, name, age, score) );
 	}
 	public boolean handleDeleteStudentInfo(String ID) {
-		stuModel.delete(ID);
-		return fileOP.SaveTo("studentData.csv", stuModel.SerializeToCsvString());
+		return stuModel.delete(ID);
 	}
 	public boolean handleUpdateStudentInfo(String fromID, String toID, String toName, int toAge, double toScore) {
-		stuModel.update(fromID, new Student(toID, toName, toAge, toScore) );
-		return fileOP.SaveTo("studentData.csv", stuModel.SerializeToCsvString());
+		return stuModel.update(fromID, new Student(toID, toName, toAge, toScore) );
 	}
 	public void handleGetAllStudentInfo() {
 		ArrayList<Student> stuList = stuModel.list();
@@ -90,5 +89,10 @@ public class ControllerImpl implements Controller {
 		}
 		}
 	}
-	
+	public int getStudentCount() {
+		return stuModel.count();
+	}
+	public boolean hasID(String ID) {
+		return stuModel.hasID(ID);
+	}
 }

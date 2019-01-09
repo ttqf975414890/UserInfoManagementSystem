@@ -1,3 +1,9 @@
+/**
+ * @author 计算机 1701　叶文滔　1711640118
+ * @date 2019-01-10
+ * @version 4.1.0
+ */
+
 package UIMS.view;
 
 import java.awt.*;
@@ -18,7 +24,6 @@ import UIMS.view.TableCellListener;
 
 public class GUI {
 	
-	private StudentModel stuModel;
 	private Controller ctrl;
 	private int maxLine = 0;
 	// 学生面板
@@ -33,8 +38,8 @@ public class GUI {
 	private JRadioButton stuFindRadio1 = new JRadioButton("按 ID", true);
 	private JRadioButton stuFindRadio2 = new JRadioButton("按姓名");
 	private JRadioButton stuFindRadio3 = new JRadioButton("按姓名（模糊）");
-	private JLabel stuFindLabel = new JLabel("查找： ");
-	private JTextField stuFindText = new JTextField();;
+	private JLabel stuFindLabel = new JLabel("查找：　");
+	private JTextField stuFindText = new JTextField();
 	private GridLayout _1x5GridLayout = new GridLayout(1, 5);
 	private GridLayout _2x1GridLayout = new GridLayout(2, 1);	// 2 行 1 列
 	private Container stuFind = new Container();
@@ -43,7 +48,6 @@ public class GUI {
 
 	/** 构造方法 */
 	public GUI(StudentModel studentModel) {
-		stuModel = studentModel;
 		// stuModel.addChangeListener(this);	// 该 MVC 模式中模型不直接控制视图，而是通过控制器中转
 		buildDisplayStudent();
 		// buildDisplayWorker();
@@ -85,6 +89,7 @@ public class GUI {
 		stuFindRadio2.setFont(new Font("微软雅黑", 0, 18));
 		stuFindRadio3.setFont(new Font("微软雅黑", 0, 18));
 		stuFindLabel.setFont(new Font("微软雅黑", 0, 18));
+		stuFindLabel.setHorizontalAlignment(JLabel.RIGHT);
 		stuFindText.setFont(new Font("微软雅黑", 0, 16));
 		stuFindText.setToolTipText("在此处输入要查找的内容，清空此框以显示全部数据");
 		stuFindText.getDocument().addDocumentListener(new findChangeListener());
@@ -114,6 +119,7 @@ public class GUI {
 			case "按姓名": { stuFindRadio2.setSelected(true); break; }
 			case "按姓名（模糊）": { stuFindRadio3.setSelected(true); break; }
 			}
+			new findChangeListener().changed();
 		}
 	}
 	/** 处理表格编辑事件 */
@@ -143,12 +149,12 @@ public class GUI {
 					if (tcl.getRow() == maxLine) {				// 若是在新一行编辑
 						if ( isInteger(rowData3.toString()) &&			// 而且数据合法
 							 isNumeric(rowData4.toString())) {
-							if ( !stuModel.hasID(rowData1.toString()) ) {	// 而且 ID 不重复
+							if ( !ctrl.hasID(rowData1.toString()) ) {	// 而且 ID 不重复
 								// DefaultTableModel tableModel = (DefaultTableModel)stuTable.getModel();
 								stuTableModel.addRow(new Object[]{"", "", "", ""});
 								maxLine++;
 								if ( !ctrl.handleAddStudentInfo( rowData1.toString(), rowData2.toString(), Integer.parseInt(rowData3.toString()), Double.parseDouble(rowData4.toString()) ) ) throw new FileWritingException();	// 先处理 GUI 再操作数据是为了防止文件操作错误
-								setStudentStatusBar("学生信息添加成功。当前学生数：" + (maxLine + 1) + "。");
+								setStudentStatusBar("学生信息添加成功。当前学生数：" + (maxLine) + "。");
 							} else {
 								setStudentStatusBar("新学生 ID 与已有重复，请修改。");
 							}
@@ -159,7 +165,7 @@ public class GUI {
 						if ( isInteger(rowData3.toString()) &&			// 而且数据合法
 							 isNumeric(rowData4.toString())) {
 							if (tcl.getColumn() == 0) {						// 如果它在改 ID
-								if ( !stuModel.hasID(rowData1.toString()) ) {	// 而且新 ID 不是是已有的
+								if ( !ctrl.hasID(rowData1.toString()) ) {	// 而且新 ID 不是是已有的
 									if ( !ctrl.handleUpdateStudentInfo( tcl.getOldValue().toString(), rowData1.toString(), rowData2.toString(), Integer.parseInt(rowData3.toString()), Double.parseDouble(rowData4.toString()) ) ) throw new FileWritingException();
 									setStudentStatusBar("已将 ID 为 " + tcl.getOldValue().toString() + " 的学生的 ID 更改为 " + rowData1.toString() + "。");
 								} else {
@@ -177,7 +183,12 @@ public class GUI {
 				}
 				setStudentStatusBar();
 			} catch (FileWritingException err) {
-				setStudentStatusBar("学生数据写入失败。请检查程序文件夹文件的写入权限。");
+				// 刷新列表
+				stuTableModel = new DefaultTableModel(stuTableHeaders, 0);
+				stuTable.setModel(stuTableModel);
+				ctrl.handleGetAllStudentInfo();
+				stuTableModel.addRow(new Object[]{"", "", "", ""});
+				setStudentStatusBar("学生数据写入失败。请检查 MySQL 服务是否正常或信息中是否包含无法识别的字符（如 emoji）。");
 			}
 		}
 	};
@@ -206,13 +217,18 @@ public class GUI {
 									stuTableModel.removeRow(stuTable.getSelectedRow());
 									maxLine--;
 									if (!ctrl.handleDeleteStudentInfo(toRemove)) throw new FileWritingException();	// 先处理 GUI 再操作数据是为了防止文件操作错误
-									setStudentStatusBar("已移除 ID: " + toRemove + " 的学生的信息。当前学生数：" + (maxLine + 1) + "。");
+									setStudentStatusBar("已移除 ID: " + toRemove + " 的学生的信息。当前学生数：" + (maxLine) + "。");
 								}
 							} else {
 								setStudentStatusBar("不能对新增行进行删除操作。", true);
 							}
 						} catch (FileWritingException err) {
-							setStudentStatusBar("学生数据写入失败。请检查程序文件夹文件的写入权限。");
+							// 刷新列表
+							stuTableModel = new DefaultTableModel(stuTableHeaders, 0);
+							stuTable.setModel(stuTableModel);
+							ctrl.handleGetAllStudentInfo();
+							stuTableModel.addRow(new Object[]{"", "", "", ""});
+							setStudentStatusBar("学生数据写入失败。请检查 MySQL 服务是否正常。");
 						}
 					}
 				});

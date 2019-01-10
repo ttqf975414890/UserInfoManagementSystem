@@ -34,7 +34,7 @@ The project is tested on the following platform:
 - JDK version: 1.8.0_181
 
 ## 4. Update History
-- ### 4.1 *(Student only)*
+- ### 4.1.1 *(Student only)*
 - Created executable `.jar` file. Now you don't need to compile it before run every time.
 - Change data storage mode to MySQL database.
 - More clear code structure. Now it's real pure V->C->M->C->V frame *(Except the entrance... It's still CLI and not on the "UIMS.view" package🙃)*. Deleted some unused code.

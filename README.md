@@ -23,10 +23,17 @@ When you are operating, the status bar on the bottom of the window will prompt t
 All data will be saved on your MySQL server. So when you launch the program, it will `show you a CLI first` to ask you for the server IP address, port, username and password. When connection succeed, the GUI will be shown.
 
 ## 2. Module Structure Diagram
-<img src="https://raw.githubusercontent.com/ttqf975414890/UserInfoManagementSystem/master/模块结构图_v4.1.png">  
+<<<<<<< HEAD
+![pic](https://raw.githubusercontent.com/ttqf975414890/UserInfoManagementSystem/master/模块结构图_v4.1.png)  
 
 ## 3. Program Flow Chart
-<img src="https://raw.githubusercontent.com/ttqf975414890/UserInfoManagementSystem/master/程序流程图_v4.1.png">  
+![pic](https://raw.githubusercontent.com/ttqf975414890/UserInfoManagementSystem/master/程序流程图_v4.1.png)  
+=======
+<img src="https://raw.githubusercontent.com/ttqf975414890/UserInfoManagementSystem/master/模块结构图_v4.1.svg">  
+
+## 3. Program Flow Chart
+<img src="https://raw.githubusercontent.com/ttqf975414890/UserInfoManagementSystem/master/程序流程图_v4.1.svg">  
+>>>>>>> d99644730934bc2a90d66b9a8eddf75c372b7f6c
 
 ## 4. About
 - Project website: https://github.com/ttqf975414890/UserInfoManagementSystem  

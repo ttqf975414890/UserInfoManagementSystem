@@ -1,7 +1,7 @@
 /**
  * @author 计算机 1701　叶文滔　1711640118
  * @date 2019-01-10
- * @version 4.1.0
+ * @version 4.1.1
  */
 
 package UIMS;
@@ -44,7 +44,7 @@ public class UIMSmain {
 				try {
 					StudentModel stuModel = new StudentModel(DriverManager.getConnection(DBURL, DBUSER, DBPASSWORD));
 					System.out.println("数据库连接成功。");
-					GUI gui = new GUI(stuModel);
+					GUI gui = new GUI();
 					new ControllerImpl(stuModel, gui);
 					break;
 				} catch (SQLException err) {

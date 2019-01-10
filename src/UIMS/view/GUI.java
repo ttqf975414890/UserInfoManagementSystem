@@ -1,7 +1,7 @@
 /**
  * @author 计算机 1701　叶文滔　1711640118
  * @date 2019-01-10
- * @version 4.1.0
+ * @version 4.1.1
  */
 
 package UIMS.view;
@@ -47,8 +47,7 @@ public class GUI {
 	private Container stuBottomBar = new Container();
 
 	/** 构造方法 */
-	public GUI(StudentModel studentModel) {
-		// stuModel.addChangeListener(this);	// 该 MVC 模式中模型不直接控制视图，而是通过控制器中转
+	public GUI() {
 		buildDisplayStudent();
 		// buildDisplayWorker();
 	}

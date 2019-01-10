@@ -22,19 +22,25 @@ When you are operating, the status bar on the bottom of the window will prompt t
 
 All data will be saved on your MySQL server. So when you launch the program, it will `show you a CLI first` to ask you for the server IP address, port, username and password. When connection succeed, the GUI will be shown.
 
-## 2. About
+## 2. Module Structure Diagram
+![pic](https://raw.githubusercontent.com/ttqf975414890/UserInfoManagementSystem/master/模块结构图_v4.1.svg)  
+
+## 3. Program Flow Chart
+![pic](https://raw.githubusercontent.com/ttqf975414890/UserInfoManagementSystem/master/程序流程图_v4.1.svg)  
+
+## 4. About
 - Project website: https://github.com/ttqf975414890/UserInfoManagementSystem  
 - Author: 计算机 1701　叶文滔　1711640118  
 - Author website: http://ttqf.tech  
 
-## 3. Environments
+## 5. Environments
 The project is tested on the following platform:  
 - Windows 10 Profressional 1803 (10.0.17134.1)  
 - Eclipse Photon (4.8.0) (20180619-1200)  
 - JDK version: 1.8.0_181
 
-## 4. Update History
-- ### 4.1.1 *(Student only)*
+## 6. Update History
+- ### 4.1 *(Student only)*
 - Created executable `.jar` file. Now you don't need to compile it before run every time.
 - Change data storage mode to MySQL database.
 - More clear code structure. Now it's real pure V->C->M->C->V frame *(Except the entrance... It's still CLI and not on the "UIMS.view" package🙃)*. Deleted some unused code.

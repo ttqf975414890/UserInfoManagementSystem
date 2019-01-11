@@ -1,7 +1,7 @@
 /**
  * @author 计算机 1701　叶文滔　1711640118
- * @date 2019-01-10
- * @version 4.1.0
+ * @date 2019-01-11
+ * @version 4.2.0
  */
 
 package UIMS.model;
@@ -24,20 +24,15 @@ public class StudentModel implements PersonOperate {
 		
 	static final String author = "1711640118";
 	
-	public StudentModel(Connection DatabaseConnection) {
+	public StudentModel(Connection DatabaseConnection, boolean createNewTable) {
 		DBconn = DatabaseConnection;
 		// PreparedStatement pstmt = null;
-		try {
-			DBconn.prepareStatement("use UIMS;").execute();
-		} catch (SQLException err) {	// 这一块用于探测是不是已经创建好数据库了，没有的话就创建
+		if (createNewTable) {
 			try {
-				// pstmt = (PreparedStatement) DBconn.prepareStatement("create database UIMS;");
-				DBconn.prepareStatement("create database UIMS;").execute();
-				DBconn.prepareStatement("use UIMS;").execute();
 				DBconn.prepareStatement("create table studentData(ID text, name text, age int, score float) character set utf8;").execute();
 			} catch (SQLException e) {
 				System.out.println("数据库错误。");
-			}
+			}			
 		}
 	}
 	public boolean add(Person person) {
@@ -182,7 +177,7 @@ public class StudentModel implements PersonOperate {
 		}
 	}
 	/** 按学生 ID 修改学生，成功返回 true，失败返回 false */
-	public boolean update(String from, Student to) {
+	public boolean update(String from, Person to) {
 		Student stuTo = (Student)to;
 		PreparedStatement pstmt = null;
 		try {

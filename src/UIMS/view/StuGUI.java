@@ -1,7 +1,7 @@
 /**
  * @author 计算机 1701　叶文滔　1711640118
- * @date 2019-01-10
- * @version 4.1.1
+ * @date 2019-01-11
+ * @version 4.2.0
  */
 
 package UIMS.view;
@@ -19,10 +19,9 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import UIMS.Controller.Controller;
-import UIMS.model.StudentModel;
 import UIMS.view.TableCellListener;
 
-public class GUI {
+public class StuGUI {
 	
 	private Controller ctrl;
 	private int maxLine = 0;
@@ -47,7 +46,7 @@ public class GUI {
 	private Container stuBottomBar = new Container();
 
 	/** 构造方法 */
-	public GUI() {
+	public StuGUI() {
 		buildDisplayStudent();
 		// buildDisplayWorker();
 	}
@@ -148,11 +147,11 @@ public class GUI {
 					if (tcl.getRow() == maxLine) {				// 若是在新一行编辑
 						if ( isInteger(rowData3.toString()) &&			// 而且数据合法
 							 isNumeric(rowData4.toString())) {
-							if ( !ctrl.hasID(rowData1.toString()) ) {	// 而且 ID 不重复
+							if ( !ctrl.hasStudent(rowData1.toString()) ) {	// 而且 ID 不重复
 								// DefaultTableModel tableModel = (DefaultTableModel)stuTable.getModel();
 								stuTableModel.addRow(new Object[]{"", "", "", ""});
 								maxLine++;
-								if ( !ctrl.handleAddStudentInfo( rowData1.toString(), rowData2.toString(), Integer.parseInt(rowData3.toString()), Double.parseDouble(rowData4.toString()) ) ) throw new FileWritingException();	// 先处理 GUI 再操作数据是为了防止文件操作错误
+								if ( !ctrl.handleAddStudentInfo( rowData1.toString(), rowData2.toString(), Integer.parseInt(rowData3.toString()), Double.parseDouble(rowData4.toString()) ) ) throw new DataWritingException();	// 先处理 GUI 再操作数据是为了防止数据库操作错误
 								setStudentStatusBar("学生信息添加成功。当前学生数：" + (maxLine) + "。");
 							} else {
 								setStudentStatusBar("新学生 ID 与已有重复，请修改。");
@@ -164,14 +163,14 @@ public class GUI {
 						if ( isInteger(rowData3.toString()) &&			// 而且数据合法
 							 isNumeric(rowData4.toString())) {
 							if (tcl.getColumn() == 0) {						// 如果它在改 ID
-								if ( !ctrl.hasID(rowData1.toString()) ) {	// 而且新 ID 不是是已有的
-									if ( !ctrl.handleUpdateStudentInfo( tcl.getOldValue().toString(), rowData1.toString(), rowData2.toString(), Integer.parseInt(rowData3.toString()), Double.parseDouble(rowData4.toString()) ) ) throw new FileWritingException();
+								if ( !ctrl.hasStudent(rowData1.toString()) ) {	// 而且新 ID 不是是已有的
+									if ( !ctrl.handleUpdateStudentInfo( tcl.getOldValue().toString(), rowData1.toString(), rowData2.toString(), Integer.parseInt(rowData3.toString()), Double.parseDouble(rowData4.toString()) ) ) throw new DataWritingException();
 									setStudentStatusBar("已将 ID 为 " + tcl.getOldValue().toString() + " 的学生的 ID 更改为 " + rowData1.toString() + "。");
 								} else {
 									setStudentStatusBar("新学生 ID 与已有重复，请修改。");
 								}
 							} else {										// 如果它在改 ID 以外的信息
-								if ( !ctrl.handleUpdateStudentInfo( rowData1.toString(), rowData1.toString(), rowData2.toString(), Integer.parseInt(rowData3.toString()), Double.parseDouble(rowData4.toString()) ) ) throw new FileWritingException();;
+								if ( !ctrl.handleUpdateStudentInfo( rowData1.toString(), rowData1.toString(), rowData2.toString(), Integer.parseInt(rowData3.toString()), Double.parseDouble(rowData4.toString()) ) ) throw new DataWritingException();;
 								setStudentStatusBar("已更新 ID 为 " + rowData1.toString() + " 的学生的信息。");
 							}
 						} else {
@@ -181,7 +180,7 @@ public class GUI {
 					return;
 				}
 				setStudentStatusBar();
-			} catch (FileWritingException err) {
+			} catch (DataWritingException err) {
 				// 刷新列表
 				stuTableModel = new DefaultTableModel(stuTableHeaders, 0);
 				stuTable.setModel(stuTableModel);
@@ -191,9 +190,9 @@ public class GUI {
 			}
 		}
 	};
-	private class FileWritingException extends Exception {
+	private class DataWritingException extends Exception {
 		private static final long serialVersionUID = 1L;
-		public FileWritingException() {
+		public DataWritingException() {
 			super();
 		}
 	}
@@ -215,13 +214,13 @@ public class GUI {
 									String toRemove = stuTable.getValueAt(stuTable.getSelectedRow(), 0).toString();
 									stuTableModel.removeRow(stuTable.getSelectedRow());
 									maxLine--;
-									if (!ctrl.handleDeleteStudentInfo(toRemove)) throw new FileWritingException();	// 先处理 GUI 再操作数据是为了防止文件操作错误
+									if (!ctrl.handleDeleteStudentInfo(toRemove)) throw new DataWritingException();	// 先处理 GUI 再操作数据是为了防止文件操作错误
 									setStudentStatusBar("已移除 ID: " + toRemove + " 的学生的信息。当前学生数：" + (maxLine) + "。");
 								}
 							} else {
 								setStudentStatusBar("不能对新增行进行删除操作。", true);
 							}
-						} catch (FileWritingException err) {
+						} catch (DataWritingException err) {
 							// 刷新列表
 							stuTableModel = new DefaultTableModel(stuTableHeaders, 0);
 							stuTable.setModel(stuTableModel);

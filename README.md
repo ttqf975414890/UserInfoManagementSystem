@@ -1,12 +1,13 @@
 # UserInfoManagementSystem
 作者：计算机 1701　叶文滔　1711640118
 
-- **Attention: All Source Code is encoded in UTF-8**
-- To run this program, you should have installed `java 1.8.0 (or else)` on your system. If you want to run version 4.1, you should have another `MySQL 5.1` on your system.  
+- **Attention: I have found some problems on version 4.1.1, you have to create database manually before using. So use 4.2 version instead.**
+- **All Source Code is encoded in UTF-8.**
+- To run this program, you should have installed `java 1.8.0 (or else)` on your system. If you want to run version 4.1, you should have another `MySQL 5.1` server.  
 
 ## 1. Product Manual
 ![pic](https://raw.githubusercontent.com/ttqf975414890/UserInfoManagementSystem/master/GUI_运行截图.png)  
-UIMS is a simple `user information management system` for students, which can storage 4 columns of datas for a large quantity of students.
+UIMS is a simple `user information management system` for students and workers, which can storage a large quantity of students and workers through MySQL.
 
 Instead of using the traditional *(task given)* GUI, this program simplified the GUI that brings you a better sense just like using a Excel table.
 
@@ -23,9 +24,11 @@ When you are operating, the status bar on the bottom of the window will prompt t
 All data will be saved on your MySQL server. So when you launch the program, it will `show you a CLI first` to ask you for the server IP address, port, username and password. When connection succeed, the GUI will be shown.
 
 ## 2. Module Structure Diagram
+In 4.2 version I added worker support. Here is the example of version 4.1.1.  
 ![pic](https://raw.githubusercontent.com/ttqf975414890/UserInfoManagementSystem/master/模块结构图_v4.1.png)  
 
 ## 3. Program Flow Chart
+In 4.2 version I added worker support. Here is the example of version 4.1.1.  
 ![pic](https://raw.githubusercontent.com/ttqf975414890/UserInfoManagementSystem/master/程序流程图_v4.1.png)  
 
 ## 4. About
@@ -40,7 +43,10 @@ The project is tested on the following platform:
 - JDK version: 1.8.0_181
 
 ## 6. Update History
-- ### 4.1 *(Student only)*
+- ### 4.2
+- Added worker support.
+- Fixed problem that you have to create database manually.
+- ### 4.1.1 *(Student only)*
 - Created executable `.jar` file. Now you don't need to compile it before run every time.
 - Change data storage mode to MySQL database.
 - More clear code structure. Now it's real pure V->C->M->C->V frame *(Except the entrance... It's still CLI and not on the "UIMS.view" package🙃)*. Deleted some unused code.
